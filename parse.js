@@ -4,15 +4,22 @@ Singleton for parsing stuff.
 */
 var Parse = new function() {
 
-	this.getFirstContentByTagName = function(source, name) {
-		
+	this.getFirstByTagName = function(source, name) {
 		source = source.getElementsByTagName(name);
 		if(source) source = source[0];
-		if(source) source = source.firstChild;
-		if(source) source = source.nodeValue;
-		
 		return source || null;
-		
+	}
+
+	this.getContent = function(el) {
+		if(el) el = el.firstChild;
+		if(el) el = el.nodeValue;
+		return el || null;
+	}
+	
+	this.getFirstContentByTagName = function(source, name) {
+		source = this.getFirstByTagName(source, name);
+		if(source) source = this.getContent(source);
+		return source || null;
 	}
 
 	//userModel properties and their corresponding XML tags
@@ -38,6 +45,23 @@ var Parse = new function() {
 			
 		model.change(changes);
 		
+	}
+	
+	/*
+	Given an xml documentElement, add friends to the given manager.
+	*/
+	this.friendsXML = function(manager, xml) {
+	
+		var friends = this.getFirstByTagName(xml, "friends");
+		if(friends) friends = friends.getElementsByTagName("friend");
+		if(friends) {
+			for(var i=0, len=friends.length; i<len; i++) {
+				var content = this.getContent(friends[i]);
+				//friends are only indicated by id64
+				if(content) manager.add(userModelManager.add(new userModel(undefined, content)));
+			}
+		}
+	
 	}
 
 }

@@ -59,6 +59,29 @@ var Net = new function() {
 	
 	}
 	
+	this.getUserFriends = function(model, manager, callback) {
+		
+		if(typeof callback != "function") {
+			callback = function(){};
+		}
+		
+		this.XMLHttpRequest({
+			method: "GET",
+			url: model.friendsURLXML,
+			onload: function(xhr) {
+				var xml = xhr.responseXML;
+				if(xml) {
+					Parse.friendsXML(manager, xml.documentElement);
+				}
+				callback(xhr);
+			},
+			onerror: function(xhr) {
+				callback(xhr);
+			}
+		});
+		
+	}
+	
 	this.getUserGames = function(model, callback) {
 	
 		if(typeof callback != "function") {

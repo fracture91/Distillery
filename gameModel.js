@@ -25,7 +25,7 @@ function gameModel(id, name, logo, storeLink, users) {
 gameModel.prototype = {
 	//Override
 	equals: function(other) {
-		return this.__super.equals(other) || other.id == this.id;
+		return model.prototype.equals(other) || other.id == this.id;
 	}
 }
 

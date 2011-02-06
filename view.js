@@ -32,13 +32,24 @@ view.prototype = {
 
 	/*
 	If the view is not already rendered, render it.
-	Once rendered, insert it into the page under parent.
+	Once rendered, if not already inserted, insert it into the document under parent.
 	*/
 	commit: function() {
 		if(!this.ref) {
 			this.render();
 		}
-		this.parent.appendChild(this.ref);
+		if(this.ref.parentNode != this.parent) {
+			this.parent.appendChild(this.ref);
+			}
+	},
+	
+	/*
+	If the view has been committed, remove it from the document.
+	*/
+	uncommit: function() {
+		if(this.ref.parentNode == this.parent) {
+			this.parent.removeChild(this.ref);
+			}
 	},
 
 	/*
@@ -61,12 +72,20 @@ view.prototype = {
 		this.render();
 	},
 	
+	modelAdd: function(model) {
+	
+	},
+	
+	modelRemove: function(model) {
+	
+	},
+	
 	//Override
 	equals: function(other, ignoreRef) {
-		if(this.__super.prototype.equals(other)) {
+		if(employee.prototype.equals.call(this, other)) {
 			return true;
 		}
-		if(other.model == this.model) {
+		if(other.model.equals(this.model)) {
 			if(ignoreRef) return true;
 			if(other.ref && this.ref && other.ref == this.ref) return true;
 		}

@@ -1,6 +1,14 @@
 
 function extend(subclass, superclass){
    subclass.prototype.__proto__ = superclass.prototype;
+   /*
+   Don't trust super!  It's only for use in trivial things.
+   If you have a method A which calls this.__super.prototype.someFunc.call(this),
+   and method B inherits from A's object and calls this.__super.prototype.A.call(this),
+   __super within method A will then be bound to B's object, rather than A's.  I think.
+   Instead of using this.__super.prototype, point to the class directly (B.prototype.A.call(this)).
+   You should know what you're inheriting from anyway.
+   */
    subclass.prototype.__super = superclass;
 }
 

@@ -15,7 +15,7 @@ gameView.prototype = {
 	
 	//Override
 	modelChange: function(changes) {
-		this.__super.prototype.modelChange.call(this, changes);
+		view.prototype.modelChange.call(this, changes);
 	}
 	
 }

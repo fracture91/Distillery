@@ -11,7 +11,7 @@ function userModelManager() {
 userModelManager.prototype = {
 	//Override
 	add: function(employee) {
-		newEmployee = this.__super.prototype.add.call(this, employee);
+		newEmployee = manager.prototype.add.call(this, employee);
 		if(newEmployee.equals(employee)) {
 			//the added user didn't already exist - we should request more info from network
 			Net.getUserModel(newEmployee);
@@ -46,15 +46,16 @@ userModel.prototype = {
 	
 	//Override
 	equals: function(other) {
-		return this.__super.prototype.equals.call(this, other) || 
-				other.customURL == this.customURL ||
-				other.id64 == this.id64;
+		return model.prototype.equals.call(this, other) || 
+				(defined(other.customURL) && defined(this.customURL) && other.customURL == this.customURL) ||
+				(defined(other.id64) && defined(this.id64) && other.id64 == this.id64);
 	},
 	
 	profileURLPrefix: "http://steamcommunity.com/",
 	profileURLId: "id/",
-	profileURLProfile: "profile/",
+	profileURLProfile: "profiles/",
 	profileURLGames: "games?tab=all",
+	profileURLFriends: "/friends",
 	xmlIndicator: "xml=1",
 	
 	get profileURL() {
@@ -81,6 +82,14 @@ userModel.prototype = {
 	
 	get gamesURLXML() {
 		return this.gamesURL + "&" + this.xmlIndicator;
+	},
+	
+	get friendsURL() {
+		return this.profileURL + this.profileURLFriends;
+	},
+	
+	get friendsURLXML() {
+		return this.friendsURL + "?" + this.xmlIndicator;
 	}
 
 }

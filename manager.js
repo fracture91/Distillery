@@ -2,7 +2,7 @@
 /*
 A class for managing a group of similar objects (employees).
 The manager assumes that employees must be unique -
-that is, employee.equals(otherEmployee) must be true for any pair of managed employees.
+that is, employee.equals(otherEmployee) must be false for any pair of managed employees.
 */
 function manager() {
 	model.call(this);
@@ -40,6 +40,7 @@ manager.prototype = {
 	/*
 	Add a new employee to this manager's employees.
 	Returns either the employee that was added, or the identical employee that already existed.
+	If employee was actually added, call modelAdd on each view.
 	*/
 	add: function(employee) {
 		var existing;
@@ -49,19 +50,31 @@ manager.prototype = {
 		else {
 			this.employees.push(employee);
 		}
-		return existing || employee;
+		
+		existing = existing || employee;
+		if(existing == employee)
+			for(var i=0, len=this.views.length; i<len; i++)
+				this.views[i].modelAdd(existing);
+				
+		return existing;
 	},
 	
 	/*
 	Remove an employee from this manager's employees.
 	Return the managed employee if found, otherwise return null.
+	If employee was actually removed, call modelRemove on each view.
 	*/
 	remove: function(employee) {
 		var index = this.findIndex(employee);
 		if(index > -1) {
-			return this.employees.splice(index, 1);
+			employee = this.employees.splice(index, 1);
+			for(var i=0, len=this.views.length; i<len; i++)
+				this.views[i].modelRemove(employee);
 		}
-		return null;
+		else {
+			employee = null;
+		}
+		return employee;
 	}
 
 }
