@@ -1,6 +1,7 @@
 
 /*
 Manages all gameModels.
+All gameModels elsewhere in the app should point to objects in this manager.
 */
 var gameModelManager = new manager();
 

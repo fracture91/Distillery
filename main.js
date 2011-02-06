@@ -5,8 +5,4 @@ window.onload = function() {
 	var myModel = userModelManager.add(new userModel("fracture91"));
 	var myView = userViewManager.add(new userView(selectedContent, myModel));
 	myView.commit();
-	
-	Net.getUserModel(myModel, function(xhr) {
-	
-	});
 }

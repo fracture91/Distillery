@@ -1,25 +1,11 @@
 
 /*
-A class for an employee, which is managed by manager.
-*/
-function employee() {}
-employee.prototype = {
-	/*
-	Tests if two employees are equal.
-	*/
-	equals: function(other) {
-		return other == this;
-	}
-}
-
-
-/*
 A class for managing a group of similar objects (employees).
 The manager assumes that employees must be unique -
 that is, employee.equals(otherEmployee) must be true for any pair of managed employees.
 */
 function manager() {
-	employee.call(this);
+	model.call(this);
 
 	/*
 	The employees which this manager manages.
@@ -80,4 +66,4 @@ manager.prototype = {
 
 }
 
-extend(manager, employee);
+extend(manager, model);

@@ -1,8 +1,29 @@
 
 /*
 Manages all userModels.
+All userModels elsewhere in the app should point to objects in this manager.
 */
-var userModelManager = new manager();
+function userModelManager() {
+	manager.call(this);
+
+}
+
+userModelManager.prototype = {
+	//Override
+	add: function(employee) {
+		newEmployee = this.__super.prototype.add.call(this, employee);
+		if(newEmployee.equals(employee)) {
+			//the added user didn't already exist - we should request more info from network
+			Net.getUserModel(newEmployee);
+		}
+		return newEmployee;
+	}
+}
+
+extend(userModelManager, manager);
+
+//it's now a singleton
+userModelManager = new userModelManager();
 
 /*
 Holds information about a user.
@@ -25,7 +46,7 @@ userModel.prototype = {
 	
 	//Override
 	equals: function(other) {
-		return this.__super.equals(other) || 
+		return this.__super.prototype.equals.call(this, other) || 
 				other.customURL == this.customURL ||
 				other.id64 == this.id64;
 	},
