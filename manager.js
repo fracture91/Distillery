@@ -67,7 +67,7 @@ manager.prototype = {
 	remove: function(employee) {
 		var index = this.findIndex(employee);
 		if(index > -1) {
-			employee = this.employees.splice(index, 1);
+			employee = this.employees.splice(index, 1)[0];
 			for(var i=0, len=this.views.length; i<len; i++)
 				this.views[i].modelRemove(employee);
 		}

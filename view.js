@@ -72,12 +72,22 @@ view.prototype = {
 		this.render();
 	},
 	
+	/*
+	If the model is a manager, this will be called when something is added.
+	model is the model that was added.
+	View should render any changes.
+	*/
 	modelAdd: function(model) {
-	
+		this.render();
 	},
 	
+	/*
+	If the model is a manager, this will be called when something is removed.
+	model is the model that was removed.
+	View should render any changes.
+	*/
 	modelRemove: function(model) {
-	
+		this.render();
 	},
 	
 	//Override

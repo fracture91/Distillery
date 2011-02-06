@@ -5,13 +5,54 @@ float: none !important;
 }
 
 body {
-background-color: #363636;
+background-color: #161616;
 color: #aeaeae;
 font-family: arial, sans-serif;
 }
 
+body > div {
+float: left;
+}
+
+header {
+
+}
+
 section {
+background-color: #363636;
+margin: 5px;
+padding: 5px 10px;
+position: relative;
+}
+
+#friends {
+clear: left;
+}
+
+input[type="text"] {
 background-color: #161616;
+border: 1px solid #777777;
+color: #e1e1e1;
+}
+
+#friends > form > input[type="text"] {
+width: 135px;
+}
+
+h2 {
+margin: 5px;
+}
+
+.content {
+margin: 5px 0;
+background-color: #161616;
+border: 1px solid #4b4b4b;
+border-radius: 2px;
+overflow: auto;
+}
+
+#selected > .content > .user {
+float: left;
 }
 
 .user {
@@ -37,6 +78,13 @@ background-color: #454545;
 margin-top: 3px;
 margin-left: 5px;
 margin-right: 5px;
+width: 150px;
+}
+
+.user > div > h4, .user > div > h6 {
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
 }
 
 .user > div > h4 {
