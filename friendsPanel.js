@@ -1,0 +1,6 @@
+
+var friendsPanel = new function() {
+	
+
+
+}

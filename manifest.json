@@ -1,0 +1,19 @@
+{
+"update_url":"http://clients2.google.com/service/update2/crx",
+
+	"name": "Distillery",
+	"version": "1.0.0.0",
+	"description": "Shows you which Steam games you have in common with other people.",
+	"minimum_chrome_version": "9.0.597.84",
+
+	"permissions": [
+		"http://steamcommunity.com/*"
+	],
+	
+	"app": {
+		"launch": {
+			"local_path": "distillery.html"
+		}
+	}
+
+}	
