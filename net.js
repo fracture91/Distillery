@@ -96,9 +96,6 @@ var Net = new function() {
 				if(xml) {
 					Parse.gamesXML(model.games, xml.documentElement);
 				}
-				var employees = model.games.employees;
-				for(var i=0, len=employees.length; i<len; i++)
-					employees[i].users.add(model);
 				callback(xhr);
 			},
 			onerror: function(xhr) {
