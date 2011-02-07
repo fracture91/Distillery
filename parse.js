@@ -63,5 +63,23 @@ var Parse = new function() {
 		}
 	
 	}
+	
+	this.gamesXML = function(manager, xml) {
+	
+		var games = this.getFirstByTagName(xml, "games");
+		if(games) games = games.getElementsByTagName("game");
+		if(games) {
+			for(var i=0, len=games.length; i<len; i++) {
+				var thisGame = games[i];
+				manager.add(gameModelManager.add(new gameModel(
+					this.getFirstContentByTagName(thisGame, "appID"),
+					this.getFirstContentByTagName(thisGame, "name"),
+					this.getFirstContentByTagName(thisGame, "logo"),
+					this.getFirstContentByTagName(thisGame, "storeLink")
+				)));
+			}
+		}
+	
+	}
 
 }

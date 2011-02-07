@@ -32,6 +32,16 @@ aggregate.prototype = {
 				return employees[i];
 	},
 	
+	/*
+	Given a reference to a DOM element, find a child view with that ref.
+	*/
+	findChildByRef: function(ref) {
+		var employees = this.children.employees;
+		for(var i=0, len=employees.length; i<len; i++)
+			if(employees[i].ref == ref)
+				return employees[i];
+	},
+	
 	//Override
 	commit: function(){
 		var employees = this.children.employees;

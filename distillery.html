@@ -36,7 +36,12 @@
 				<input type="text">
 				<input type="submit" value="Get my friends">
 			</form>
-			<div class="content"></div>
+			<div class="content">
+				<p class="help">
+					The friends of the user you input above will be displayed here.
+					Clicking a friend will add that friend to Selected Users.
+				</p>
+			</div>
 		</section>
 		<div class="clear"></div>
 	</div>
@@ -44,11 +49,29 @@
 	<div>
 		<section id="selected">
 			<h2>Selected Users</h1>
-			<div class="content"></div>
+			<form>
+				<input type="text">
+				<input type="submit" value="Select this user">
+			</form>
+			<div class="content">
+				<p class="help">
+					Users who appear here will have their owned games shown below.
+					In the box above, you can input a user's custom URL if they've chosen one:
+					<code>https://steamcommunity.com/id/<strong>myCustomURL</strong></code>
+					Or their ID number, as seen on their default profile page:
+					<code>http://steamcommunity.com/profiles/<strong>12345678901234567</strong></code>
+				</p>
+			</div>
 		</section>
 		<section id="games">
 			<h2>Games</h1>
-			<div class="content"></div>
+			<div class="content">
+				<p class="help">
+					Games owned by the selected users above will be listed here.
+					The games will be sorted by the number of selected users who own them - 
+					that is, the games which the most users have in common will be at the top.
+				</p>
+			</div>
 		</section>
 		<div class="clear"></div>
 	</div>

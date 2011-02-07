@@ -2,12 +2,14 @@
 window.onload = function() {
 
 	friendsPanel = new friendsPanel();
-
-	var selectedContent = document.getElementById("selected").getElementsByClassName("content")[0];
-	var myModel = userModelManager.add(new userModel("fracture91"));
-	var myView = userViewManager.add(new userView(selectedContent, myModel));
-	myView.commit();
+	selectedPanel = new selectedPanel();
 	
-	friendsPanel.getFriends(myModel);
+	(function fixHelpDivs() {
+		var helps = document.getElementsByClassName("help");
+		for(var i=0, len=helps.length; i<len; i++) {
+			helps[i].style.display = "block";
+			helps[i].style.display = null;
+		}
+	})();
 	
 }

@@ -18,16 +18,21 @@ function friendsPanel() {
 	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
 		e.preventDefault();
 		var val = e.target.getElementsByTagName("input")[0].value;
-		
-		var model;
-		if(/\d{17}/.test(val)) {
-			model = new userModel(undefined, val);
-		}
-		else {
-			model = new userModel(val);
-		}
-			
+		var model = userModel.prototype.modelFromString(val);
 		that.getFriends(userModelManager.add(model));
+	}, false);
+	
+	this.content.addEventListener("click", function(e) {
+		var target = e.target;
+		if(target) {
+			if(target.tagName=="DIV" || target.tagName=="IMG" && (target = target.parentNode)) {
+				var view = that.findChildByRef(target);
+				if(view) {
+					e.preventDefault();
+					selectedPanel.model.add(view.model);
+				}
+			}
+		}
 	}, false);
 
 }

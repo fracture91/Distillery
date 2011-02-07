@@ -45,18 +45,15 @@ manager.prototype = {
 	add: function(employee) {
 		var existing;
 		if(existing = this.find(employee)) {
-			//return existing employee later
+			//don't add it, it's already in this manager
 		}
 		else {
 			this.employees.push(employee);
-		}
-		
-		existing = existing || employee;
-		if(existing == employee)
 			for(var i=0, len=this.views.length; i<len; i++)
-				this.views[i].modelAdd(existing);
-				
-		return existing;
+				this.views[i].modelAdd(employee);
+		}	
+		
+		return existing || employee;
 	},
 	
 	/*

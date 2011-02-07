@@ -51,6 +51,17 @@ userModel.prototype = {
 				(defined(other.id64) && defined(this.id64) && other.id64 == this.id64);
 	},
 	
+	modelFromString: function(str) {
+		
+		if(/\d{17}/.test(str)) {
+			return new userModel(undefined, str);
+		}
+		else {
+			return new userModel(str);
+		}
+		
+	},
+	
 	profileURLPrefix: "http://steamcommunity.com/",
 	profileURLId: "id/",
 	profileURLProfile: "profiles/",

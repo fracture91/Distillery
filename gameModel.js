@@ -8,7 +8,7 @@ var gameModelManager = new manager();
 /*
 Holds information about a game.
 */
-function gameModel(id, name, logo, storeLink, users) {
+function gameModel(id, name, logo, storeLink) {
 	model.call(this);
 
 	this.id = id;

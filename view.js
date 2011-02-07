@@ -95,6 +95,7 @@ view.prototype = {
 		if(employee.prototype.equals.call(this, other)) {
 			return true;
 		}
+		if(!other.model) return false;
 		if(other.model.equals(this.model)) {
 			if(ignoreRef) return true;
 			if(other.ref && this.ref && other.ref == this.ref) return true;
