@@ -75,6 +75,12 @@ manager.prototype = {
 			employee = null;
 		}
 		return employee;
+	},
+	
+	clear: function() {
+		for(var i=0, len=this.employees.length; i<len; i++)
+			//don't remove employees[i] - you'll eventually go out of array range
+			this.remove(this.employees[0]);
 	}
 
 }

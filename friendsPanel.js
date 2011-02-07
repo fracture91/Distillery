@@ -1,31 +1,20 @@
 
 /*
-function friendsManager() {
-	manager.call(this);
-	
-	
-	
-}
-
-extend(friendsManager, manager);
+An aggregate for the friends list.
+Does not actually render itself - all necessary HTML is already under this.ref.
+Should not be instantiated until the document is ready.
 */
-
-
 function friendsPanel() {
 	var ref = document.getElementById("friends");
 	//the model will be a manager of userModels
-	view.call(this, ref.parentNode, new manager());
+	aggregate.call(this, ref.parentNode, new manager(), new manager());
 	
 	this.ref = ref;
 	this.content = this.ref.getElementsByClassName("content")[0];
 	
-	/*
-	The userViews for each model in this.model.
-	*/
-	this.friends = new manager();
-	
 	var that = this;
 	
+	//get the friends list of the id64/customURL that was inputted
 	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
 		e.preventDefault();
 		var val = e.target.getElementsByTagName("input")[0].value;
@@ -49,51 +38,22 @@ friendsPanel.prototype = {
 	Given a userModel, get the friends of this userModel and put them friendsPanel's model.
 	*/
 	getFriends: function(userModel) {
-		this.clearFriends();
+		this.model.clear();
 		Net.getUserFriends(userModel, this.model);
-	},
-	
-	clearFriends: function() {
-		var employees = this.model.employees;
-		for(var i=0, len=employees.length; i<len; i++)
-			//don't remove employees[i] - you'll eventually go out of array range
-			this.model.remove(employees[0]);
 	},
 
 	//Override
 	modelAdd: function(model) {
-		var view = this.friends.add(userViewManager.add(new userView(this.content, model)));
+		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
 		view.commit();
 	},
 	
 	//Override
 	modelRemove: function(model) {
-		var view = this.friends.remove(userViewManager.remove(this.findViewByModel(model)));
+		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
 		view.uncommit();
-	},
-	
-	findViewByModel: function(model) {
-		var employees = this.friends.employees;
-		for(var i=0, len=employees.length; i<len; i++)
-			if(employees[i].model.equals(model))
-				return employees[i];
-	},
-	
-	//Override
-	commit: function(){
-		var employees = this.friends.employees;
-		for(var i=0, len=employees.length; i<len; i++)
-			employees[i].render();
-		this.render();
-	},
-	
-	//Override
-	render: function() {
-		var employees = this.friends.employees;
-		for(var i=0, len=employees.length; i<len; i++)
-			if(!employees[i].ref) employees[i].render();
 	}
 
 }
 
-extend(friendsPanel, view);
+extend(friendsPanel, aggregate);
