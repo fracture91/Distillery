@@ -29,6 +29,10 @@ gameView.prototype = {
 		this.storeLink.href = url || null;
 	},
 	
+	setSharedAmong: function(num) {
+		this.sharedAmong.setAttribute("sharedamong", num);
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.logo = document.createElement("img");
@@ -36,12 +40,14 @@ gameView.prototype = {
 			this.storeLink = document.createElement("a");
 			this.storeLink.innerText = "Store Page";
 			this.id = document.createElement("h6");
+			this.sharedAmong = document.createElement("h5");
 		}
 		
 		this.setLogo(this.model.logo);
 		this.setName(this.model.name);
 		this.setStoreLink(this.model.storeLink);
 		this.setId(this.model.id);
+		this.setSharedAmong(this.model.selectedUsersLength);
 		
 		if(!this.ref) {
 			this.ref = document.createElement("div");
@@ -53,6 +59,7 @@ gameView.prototype = {
 			this.info.appendChild(this.name);
 			this.info.appendChild(this.storeLink);
 			this.info.appendChild(this.id);
+			this.info.appendChild(this.sharedAmong);
 			this.ref.appendChild(this.info);
 			this.ref.appendChild(this.clear);
 		}
@@ -66,6 +73,7 @@ gameView.prototype = {
 			if(changes.name) this.setName(changes.name);
 			if(changes.storeLink) this.setStoreLink(changes.storeLink);
 			if(changes.id) this.setId(changes.id);
+			if(defined(changes.selectedUsersLength)) this.setSharedAmong(changes.selectedUsersLength);
 		}
 	}
 	

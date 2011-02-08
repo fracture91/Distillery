@@ -5,6 +5,8 @@ float: none !important;
 }
 
 body {
+position: relative;
+margin: 5px;
 background-color: #161616;
 color: #aeaeae;
 font-family: arial, sans-serif;
@@ -194,10 +196,22 @@ font-size: 0.6em;
 
 .game > div > h6 {
 margin: 0;
-margin-top: 25px;
 color: #777;
 font-weight: inherit;
 font-size: 0.7em;
+}
+
+.game > div > h5 {
+margin: 0;
+margin-top: 8px;
+}
+
+.game > div > h5:after {
+content: attr(sharedamong) " people own this game";
+}
+
+.game > div > h5[sharedamong="1"]:after {
+content: attr(sharedamong) " person owns this game";
 }
 
 .user a, .game a {

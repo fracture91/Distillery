@@ -50,6 +50,13 @@ aggregate.prototype = {
 	},
 	
 	//Override
+	uncommit: function(){
+		var employees = this.children.employees;
+		for(var i=0, len=employees.length; i<len; i++)
+			employees[i].uncommit();
+	},
+	
+	//Override
 	render: function() {
 		var employees = this.children.employees;
 		for(var i=0, len=employees.length; i<len; i++)

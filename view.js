@@ -47,7 +47,7 @@ view.prototype = {
 	If the view has been committed, remove it from the document.
 	*/
 	uncommit: function() {
-		if(this.ref.parentNode == this.parent) {
+		if(this.ref && this.ref.parentNode == this.parent) {
 			this.parent.removeChild(this.ref);
 			}
 	},
