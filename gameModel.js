@@ -20,6 +20,11 @@ function gameModel(id, name, logo, storeLink) {
 	Users who own this game - managed userModels.
 	*/
 	this.users = new manager();
+	
+	/*
+	Users who own this game and are selected.
+	*/
+	this.selectedUsers = new manager();
 }
 
 gameModel.prototype = {

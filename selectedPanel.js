@@ -46,17 +46,30 @@ selectedPanel.prototype = {
 		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
 		view.commit();
 		if(model.games.employees.length==0) {
+			var that = this;
 			Net.getUserGames(model, function(xhr) {
 				var employees = model.games.employees;
 				for(var i=0, len=employees.length; i<len; i++)
 					employees[i].users.add(model);
+				model.select();
+				gamesPanel.addGames(model.games);
 			});
+		}
+		else {
+			model.select();
+			gamesPanel.addGames(model.games);
 		}
 	},
 	
 	//Override
 	modelRemove: function(model) {
 		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
+		model.deselect();
+		//remove all of this user's games which no longer have any selected users
+		var employees = model.games.employees;
+		for(var i=0, len=employees.length; i<len; i++)
+			if(employees[i].selectedUsers.employees.length==0)
+				gamesPanel.model.remove(employees[i]);
 		view.uncommit();
 	}
 

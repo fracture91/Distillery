@@ -10,6 +10,15 @@ color: #aeaeae;
 font-family: arial, sans-serif;
 }
 
+a {
+color: white;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
 body > div {
 float: left;
 position: absolute;
@@ -109,37 +118,52 @@ min-height: 84px;
 float: left;
 }
 
-.user {
+.user, .game {
 padding: 5px;
 margin: 5px;
 font-weight: normal;
-cursor: pointer;
 border: 1px solid black;
 border-radius: 4px;
+}
+
+.user {
+cursor: pointer;
 }
 
 .user:hover {
 background: -webkit-gradient(linear, left top, right top, from(rgba(62,92,133, 1)), to(rgba(62,92,133, 0)));
 }
 
-.user > img, .user > div  {
+.user > img, .user > div,
+.game > img, .game > div  {
 float: left;
+}
+
+.user > img, .game > img {
+margin: 3px;
+border: 4px solid #676767;
+border-radius: 4px;
+background-color: #454545;
 }
 
 .user > img {
 height: 48px;
 width: 48px;
-margin: 3px;
-border: 4px solid #676767;
-border-radius: 4px;
-background-color: #454545;
 cursor: pointer;
 }
 
-.user > div {
+.game > img {
+width: 184px;
+height: 69px;
+}
+
+.user > div, .game > div {
 margin-top: 3px;
 margin-left: 5px;
 margin-right: 5px;
+}
+
+.user > div {
 width: 150px;
 cursor: default;
 }
@@ -156,8 +180,26 @@ font-weight: inherit;
 font-size: 0.9em;
 }
 
+.game > div > h4 {
+margin: 0;
+font-weight: bolder;
+font-size: 1.2em;
+} 
+
 .user > div > h6 {
 margin: 0 10px;
 font-weight: inherit;
 font-size: 0.6em;
+}
+
+.game > div > h6 {
+margin: 0;
+margin-top: 25px;
+color: #777;
+font-weight: inherit;
+font-size: 0.7em;
+}
+
+.user a, .game a {
+font-size: smaller;
 }

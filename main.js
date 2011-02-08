@@ -3,6 +3,7 @@ window.onload = function() {
 
 	friendsPanel = new friendsPanel();
 	selectedPanel = new selectedPanel();
+	gamesPanel = new gamesPanel();
 	
 	(function fixHelpDivs() {
 		var helps = document.getElementsByClassName("help");

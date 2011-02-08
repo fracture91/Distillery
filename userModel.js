@@ -62,6 +62,26 @@ userModel.prototype = {
 		
 	},
 	
+	/*
+	For each game in this.games, add this to game.selectedUsers.
+	*/
+	select: function() {
+		var employees = this.games.employees;
+		for(var i=0, len=employees.length; i<len; i++) {
+			employees[i].selectedUsers.add(this);
+		}
+	},
+	
+	/*
+	For each game in this.games, remove this from game.selectedUsers.
+	*/
+	deselect: function() {
+		var employees = this.games.employees;
+		for(var i=0, len=employees.length; i<len; i++) {
+			employees[i].selectedUsers.remove(this);
+		}
+	},
+	
 	profileURLPrefix: "http://steamcommunity.com/",
 	profileURLId: "id/",
 	profileURLProfile: "profiles/",
