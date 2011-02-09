@@ -11,6 +11,7 @@ function friendsPanel() {
 	
 	this.ref = ref;
 	this.content = this.ref.getElementsByClassName("content")[0];
+	this.fitAncestor = document.body.getElementsByTagName("div")[0];
 	
 	var that = this;
 	

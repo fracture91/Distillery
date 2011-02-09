@@ -55,12 +55,14 @@ selectedPanel.prototype = {
 				if(that.model.find(model)) {
 					model.select();
 					gamesPanel.addGames(model.games);
+					resize(window);
 				}
 			});
 		}
 		else {
 			model.select();
 			gamesPanel.addGames(model.games);
+			resize(window);
 		}
 	},
 	
@@ -74,6 +76,7 @@ selectedPanel.prototype = {
 			if(employees[i].selectedUsersLength==0)
 				gamesPanel.model.remove(employees[i]);
 		view.uncommit();
+		resize(window);
 	}
 
 }

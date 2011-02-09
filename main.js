@@ -5,12 +5,13 @@ window.onload = function() {
 	selectedPanel = new selectedPanel();
 	gamesPanel = new gamesPanel();
 	
-	(function fixHelpDivs() {
-		var helps = document.getElementsByClassName("help");
-		for(var i=0, len=helps.length; i<len; i++) {
-			helps[i].style.display = "block";
-			helps[i].style.display = null;
-		}
-	})();
+	fixHelpDivs();
+	
+	function fitPanels(e) {
+		expandToFit(friendsPanel.content, friendsPanel.fitAncestor);
+		expandToFit(gamesPanel.content, gamesPanel.fitAncestor);
+	}
+	fitPanels();
+	window.addEventListener("resize", fitPanels, true);
 	
 }
