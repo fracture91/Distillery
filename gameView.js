@@ -1,4 +1,7 @@
 
+//todo: allow user to display selected users who own and don't own this game
+//todo: show how many selected users don't own this game, style based on this number (e.g. 0 is greenish, 1 is yellow, etc.)
+
 /*
 Manages all gameViews.
 */
@@ -12,6 +15,8 @@ function gameView(parent, model) {
 }
 
 gameView.prototype = {
+	
+	//todo: clean up this ugly rendering stuff
 	
 	setLogo: function(url) {
 		this.logo.src = url || null;
@@ -66,7 +71,7 @@ gameView.prototype = {
 	},
 	
 	//Override
-	modelChange: function(changes) {
+	onModelChange: function(source, changes) {
 		//only change if it has already been rendered
 		if(this.ref) {
 			if(changes.logo) this.setLogo(changes.logo);

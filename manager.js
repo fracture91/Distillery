@@ -1,4 +1,8 @@
 
+//todo: sort method, event
+//todo: copy method
+//todo: ignore param for add and remove (to be used by add/removeMany and to pass to listeners)
+
 /*
 A class for managing a group of similar objects (employees).
 The manager assumes that employees must be unique -
@@ -37,10 +41,12 @@ manager.prototype = {
 		return -1;
 	},
 
+	//todo: addMany to add contents of a manager
+	
 	/*
 	Add a new employee to this manager's employees.
 	Returns either the employee that was added, or the identical employee that already existed.
-	If employee was actually added, call modelAdd on each view.
+	If employee was actually added, fire modelAdd event and pass along new employee.
 	*/
 	add: function(employee) {
 		var existing;
@@ -49,24 +55,24 @@ manager.prototype = {
 		}
 		else {
 			this.employees.push(employee);
-			for(var i=0, len=this.views.length; i<len; i++)
-				this.views[i].modelAdd(employee);
-		}	
+			this.event("modelAdd", this, employee);
+		}
 		
 		return existing || employee;
 	},
 	
+	//todo: removeMany to remove contents of a manager
+	
 	/*
 	Remove an employee from this manager's employees.
 	Return the managed employee if found, otherwise return null.
-	If employee was actually removed, call modelRemove on each view.
+	If employee was actually removed, fire modelRemove event and pass along the removed employee.
 	*/
 	remove: function(employee) {
 		var index = this.findIndex(employee);
 		if(index > -1) {
 			employee = this.employees.splice(index, 1)[0];
-			for(var i=0, len=this.views.length; i<len; i++)
-				this.views[i].modelRemove(employee);
+			this.event("modelRemove", this, employee);
 		}
 		else {
 			employee = null;

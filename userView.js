@@ -13,6 +13,8 @@ function userView(parent, model) {
 
 userView.prototype = {
 	
+	//todo: clean up this ugly rendering stuff
+	
 	setIcon: function(src) {
 		this.icon.src = src || null;
 	},
@@ -58,7 +60,7 @@ userView.prototype = {
 	},
 	
 	//Override
-	modelChange: function(changes) {
+	onModelChange: function(source, changes) {
 		//only change if it has already been rendered
 		if(this.ref) {
 			if(changes.icon) this.setIcon(changes.icon);

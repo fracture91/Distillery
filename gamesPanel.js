@@ -1,4 +1,10 @@
 
+//todo: allow user to choose not to display games that the entire group can't play
+//todo: instead, allow user to set tolerance for how many people can't play
+//todo: allow user to ignore games forever (like single player games)
+//todo: select random game
+//todo: recommend button
+
 /*
 An aggregate for the list of owned games.
 Does not actually render itself - all necessary HTML is already under this.ref.
@@ -41,6 +47,8 @@ gamesPanel.prototype = {
 		return this.compareName(view1, view2);
 	},
 
+	//todo: move into manager
+	//todo: let user choose how to sort
 	/*
 	Sort the gamePanel's children using this.defaultCompare.
 	*/
@@ -64,14 +72,14 @@ gamesPanel.prototype = {
 	},
 
 	//Override
-	modelAdd: function(model) {
+	onModelAdd: function(source, model) {
 		var view = this.children.add(gameViewManager.add(new gameView(this.content, model)));
 		this.sort();
 		view.commit();
 	},
 	
 	//Override
-	modelRemove: function(model) {
+	onModelRemove: function(source, model) {
 		var view = this.children.remove(gameViewManager.remove(this.findChildByModel(model)));
 		this.sort();
 		view.uncommit();

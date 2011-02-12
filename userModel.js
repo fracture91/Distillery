@@ -1,4 +1,6 @@
 
+//todo: "selected" property
+
 /*
 Manages all userModels.
 All userModels elsewhere in the app should point to objects in this manager.

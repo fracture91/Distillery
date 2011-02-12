@@ -15,6 +15,7 @@ function friendsPanel() {
 	
 	var that = this;
 	
+	//todo: validation
 	//get the friends list of the id64/customURL that was inputted
 	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
 		e.preventDefault();
@@ -49,13 +50,13 @@ friendsPanel.prototype = {
 	},
 
 	//Override
-	modelAdd: function(model) {
+	onModelAdd: function(source, model) {
 		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
 		view.commit();
 	},
 	
 	//Override
-	modelRemove: function(model) {
+	onModelRemove: function(source, model) {
 		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
 		view.uncommit();
 	}

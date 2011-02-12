@@ -1,7 +1,7 @@
 
 /*
 An aggregate is kind of a collection of views and models.
-It is a primarily a view based on a models manager, but it also controls its own views.
+It is primarily a view based on a models manager, but it also controls its own views.
 It should be used when you want to have some functionality on top of a bunch of views
 and when you want to keep track of your own views.
 For example, a friends list (userModels and userViews) that can get friends for a certain user.

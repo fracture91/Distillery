@@ -1,4 +1,6 @@
 
+//todo: always open external links in new tab
+
 window.onload = function() {
 
 	friendsPanel = new friendsPanel();

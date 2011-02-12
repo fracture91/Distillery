@@ -26,12 +26,14 @@ function gameModel(id, name, logo, storeLink) {
 	*/
 	this.selectedUsers = new manager();
 	//listen for changes in selectedUsers so we can keep track of length
-	this.selectedUsers.addView(this);
+	this.selectedUsers.listen(this);
 	
 	/*
 	The length of this.selectedUsers.
 	*/
 	this.selectedUsersLength = 0;
+	
+	//todo: make games aware of selected users which don't own them
 
 }
 
@@ -40,20 +42,13 @@ gameModel.prototype = {
 	equals: function(other) {
 		return model.prototype.equals(other) || other.id == this.id;
 	},
-
-	//Faux Override
-	modelChange: function(changes) {
-		//do nothing
-	},
 	
-	//Faux Override
-	modelAdd: function(model) {
+	onModelAdd: function(source, model) {
 		//a user was added to this.selectedUsers - increment length
 		this.change({selectedUsersLength: this.selectedUsersLength+1});
 	},
 	
-	//Faux Override
-	modelRemove: function(model) {
+	onModelRemove: function(source, model) {
 		//a user was removed from this.selectedUsers - decrement length
 		this.change({selectedUsersLength: this.selectedUsersLength-1});
 	}

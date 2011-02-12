@@ -4,7 +4,7 @@ Class for a view - something that displays information from a model.
 */
 
 function view(parent, model) {
-	employee.call(this);
+	observable.call(this);
 
 	/*
 	The parent element in the DOM that this view will be appended to.
@@ -23,8 +23,8 @@ function view(parent, model) {
 	*/
 	this.ref = null;
 	
-	//make sure the model is aware of this view
-	this.model.addView(this);
+	//listen for events from the model
+	this.model.listen(this);
 
 }
 
@@ -67,7 +67,7 @@ view.prototype = {
 	When the model is changed, this will eventually be called.
 	View should render any changes.
 	*/
-	modelChange: function(changes) {
+	onModelChange: function(source, changes) {
 		//very simple implementation, should be overridden by subclasses
 		this.render();
 	},
@@ -77,7 +77,7 @@ view.prototype = {
 	model is the model that was added.
 	View should render any changes.
 	*/
-	modelAdd: function(model) {
+	onModelAdd: function(source, model) {
 		this.render();
 	},
 	
@@ -86,7 +86,7 @@ view.prototype = {
 	model is the model that was removed.
 	View should render any changes.
 	*/
-	modelRemove: function(model) {
+	onModelRemove: function(source, model) {
 		this.render();
 	},
 	
@@ -105,4 +105,4 @@ view.prototype = {
 
 }
 
-extend(view, employee);
+extend(view, observable);

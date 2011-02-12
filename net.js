@@ -1,4 +1,6 @@
 
+//todo: indicate errors
+
 /*
 Singleton for doing stuff on the network.
 */

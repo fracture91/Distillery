@@ -1,4 +1,6 @@
 
+//todo: scroll to bottom when adding a user
+
 /*
 An aggregate for the list of selected users.
 Does not actually render itself - all necessary HTML is already under this.ref.
@@ -14,6 +16,7 @@ function selectedPanel() {
 	
 	var that = this;
 	
+	//todo: validation
 	//get the friends list of the id64/customURL that was inputted
 	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
 		e.preventDefault();
@@ -42,7 +45,7 @@ function selectedPanel() {
 selectedPanel.prototype = {
 
 	//Override
-	modelAdd: function(model) {
+	onModelAdd: function(source, model) {
 		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
 		view.commit();
 		if(model.games.employees.length==0) {
@@ -53,6 +56,7 @@ selectedPanel.prototype = {
 					employees[i].users.add(model);
 				//make sure this user wasn't removed in the meantime
 				if(that.model.find(model)) {
+					//todo: move to a helper method
 					model.select();
 					gamesPanel.addGames(model.games);
 					resize(window);
@@ -67,7 +71,7 @@ selectedPanel.prototype = {
 	},
 	
 	//Override
-	modelRemove: function(model) {
+	onModelRemove: function(source, model) {
 		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
 		model.deselect();
 		//remove all of this user's games which no longer have any selected users
