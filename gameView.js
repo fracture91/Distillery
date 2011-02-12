@@ -1,6 +1,5 @@
 
 //todo: allow user to display selected users who own and don't own this game
-//todo: show how many selected users don't own this game, style based on this number (e.g. 0 is greenish, 1 is yellow, etc.)
 
 /*
 Manages all gameViews.
@@ -36,6 +35,12 @@ gameView.prototype = {
 	
 	setSharedAmong: function(num) {
 		this.sharedAmong.setAttribute("sharedamong", num);
+		this.ref.setAttribute("sharedamong", num);
+	},
+	
+	setNotSharedAmong: function(num) {
+		this.sharedAmong.setAttribute("notsharedamong", num);
+		this.ref.setAttribute("notsharedamong", num);
 	},
 	
 	render: function() {
@@ -52,7 +57,6 @@ gameView.prototype = {
 		this.setName(this.model.name);
 		this.setStoreLink(this.model.storeLink);
 		this.setId(this.model.id);
-		this.setSharedAmong(this.model.selectedUsersLength);
 		
 		if(!this.ref) {
 			this.ref = document.createElement("div");
@@ -68,6 +72,9 @@ gameView.prototype = {
 			this.ref.appendChild(this.info);
 			this.ref.appendChild(this.clear);
 		}
+		
+		this.setSharedAmong(this.model.selectedUsersLength);
+		this.setNotSharedAmong(this.model.selectedUsersLackingLength);
 	},
 	
 	//Override
@@ -79,6 +86,7 @@ gameView.prototype = {
 			if(changes.storeLink) this.setStoreLink(changes.storeLink);
 			if(changes.id) this.setId(changes.id);
 			if(defined(changes.selectedUsersLength)) this.setSharedAmong(changes.selectedUsersLength);
+			if(defined(changes.selectedUsersLackingLength)) this.setNotSharedAmong(changes.selectedUsersLackingLength);
 		}
 	}
 	

@@ -166,6 +166,27 @@ cursor: pointer;
 background: -webkit-gradient(linear, left top, right top, from(rgba(62,92,133, 1)), to(rgba(62,92,133, 0)));
 }
 
+.game[notsharedamong] {
+background-color: #321515;
+}
+
+.game[notsharedamong="0"] {
+background-color: #153215;
+}
+
+/*If we're just looking at one user's games, don't color*/
+.game[notsharedamong="0"][sharedamong="1"] {
+background-color: transparent;
+}
+
+.game[notsharedamong="1"] {
+background-color: #323215;
+}
+
+.game[notsharedamong="2"] {
+background-color: #322215;
+}
+
 .user > img, .user > div,
 .game > img, .game > div  {
 float: left;
@@ -237,11 +258,19 @@ margin-top: 8px;
 }
 
 .game > div > h5:after {
-content: attr(sharedamong) " people own this game";
+content: attr(sharedamong) " people own this game, " attr(notsharedamong) " don't";
 }
 
 .game > div > h5[sharedamong="1"]:after {
-content: attr(sharedamong) " person owns this game";
+content: attr(sharedamong) " person owns this game, " attr(notsharedamong) " don't";
+}
+
+.game > div > h5[notsharedamong="1"]:after {
+content: attr(sharedamong) " people own this game, " attr(notsharedamong) " doesn't";
+}
+
+.game > div > h5[sharedamong="1"][notsharedamong="1"]:after {
+content: attr(sharedamong) " person owns this game, " attr(notsharedamong) " doesn't";
 }
 
 .user a, .game a {

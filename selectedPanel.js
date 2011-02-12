@@ -46,6 +46,13 @@ selectedPanel.prototype = {
 	select: function(model) {
 		model.select();
 		gamesPanel.model.addMany(model.games.employees);
+		//for each game in gamesPanel, if this user isn't in selectedUsers, then add him to lacking
+		var games = gamesPanel.model.employees;
+		for(var i=0, len=games.length; i<len; i++) {
+			if(!games[i].selectedUsers.find(model)) {
+				games[i].selectedUsersLacking.add(model);
+			}
+		}
 	},
 
 	//Override
@@ -75,6 +82,12 @@ selectedPanel.prototype = {
 	onModelRemove: function(source, model) {
 		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
 		model.deselect();
+		
+		//remove this model from each game's list of lacking users
+		var games = gamesPanel.model.employees;
+		for(var i=0, len=games.length; i<len; i++) {
+			games[i].selectedUsersLacking.remove(model);
+		}
 		
 		//remove all of this user's games which no longer have any selected users
 		var toRemove = [];

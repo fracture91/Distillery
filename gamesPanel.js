@@ -63,6 +63,15 @@ gamesPanel.prototype = {
 	//Override
 	onModelAdd: function(source, model, ignore) {
 		var view = this.children.add(gameViewManager.add(new gameView(this.content, model)));
+		//since this game is new, we know that there is only one person who owns it
+		//for all other people who have their games downloaded, add this game to lacking
+		var soleOwner = model.selectedUsers.employees[0];
+		var users = selectedPanel.model.employees;
+		for(var i=0, len=users.length; i<len; i++) {
+			if(users[i] != soleOwner && users[i].games.employees.length!=0) {
+				model.selectedUsersLacking.add(users[i]);
+			}
+		}
 		if(!ignore) {
 			this.sort();
 		}
@@ -75,6 +84,8 @@ gamesPanel.prototype = {
 	//Override
 	onModelRemove: function(source, model, ignore) {
 		var view = this.children.remove(gameViewManager.remove(this.findChildByModel(model)));
+		//clear selectedUsersLacking (otherwise adding the game later may show the old lacking count)
+		model.selectedUsersLacking.clear();
 		view.uncommit();
 		if(!ignore) {
 			this.sort();

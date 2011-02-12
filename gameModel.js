@@ -33,7 +33,16 @@ function gameModel(id, name, logo, storeLink) {
 	*/
 	this.selectedUsersLength = 0;
 	
-	//todo: make games aware of selected users which don't own them
+	/*
+	Users who are selected but don't own this game.
+	*/
+	this.selectedUsersLacking = new manager();
+	this.selectedUsersLacking.listen(this);
+	
+	/*
+	The length of this.selectedUsersLacking.
+	*/
+	this.selectedUsersLackingLength = 0;
 
 }
 
@@ -44,13 +53,25 @@ gameModel.prototype = {
 	},
 	
 	onModelAdd: function(source, model) {
-		//a user was added to this.selectedUsers - increment length
-		this.change({selectedUsersLength: this.selectedUsersLength+1});
+		if(source == this.selectedUsers) {
+			//a user was added to this.selectedUsers - increment length
+			this.change({selectedUsersLength: this.selectedUsersLength+1});
+		}
+		else if(source == this.selectedUsersLacking) {
+			//a user was added to this.selectedUsersLacking - increment length
+			this.change({selectedUsersLackingLength: this.selectedUsersLackingLength+1});
+		}
 	},
 	
 	onModelRemove: function(source, model) {
-		//a user was removed from this.selectedUsers - decrement length
-		this.change({selectedUsersLength: this.selectedUsersLength-1});
+		if(source == this.selectedUsers) {
+			//a user was removed from this.selectedUsers - decrement length
+			this.change({selectedUsersLength: this.selectedUsersLength-1});
+		}
+		else if(source == this.selectedUsersLacking) {
+			//a user was removed from this.selectedUsersLacking - decrement length
+			this.change({selectedUsersLackingLength: this.selectedUsersLackingLength-1});
+		}
 	}
 	
 }

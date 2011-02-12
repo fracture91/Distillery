@@ -1,4 +1,7 @@
 
+//todo: refresh button
+//todo: button to show this user's owned games
+
 /*
 Manages all userViews.
 */
