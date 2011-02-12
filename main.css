@@ -143,6 +143,21 @@ border: 1px solid black;
 border-radius: 4px;
 }
 
+/*users with visibilitystate != 3 or 2 should be darkred*/
+.user[visibilitystate] {
+border-color: darkred;
+}
+
+/*totally visible to me*/
+.user[visibilitystate="3"] {
+border-color: black;
+}
+
+/*friendsonly, not a friend*/
+.user[visibilitystate="2"] {
+border-color: #aa5000;
+}
+
 .user {
 cursor: pointer;
 }

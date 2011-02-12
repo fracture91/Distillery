@@ -30,13 +30,24 @@ userModelManager = new userModelManager();
 /*
 Holds information about a user.
 */
-function userModel(customURL, id64, id, icon, games) {
+function userModel(customURL, id64, id, icon, visibilityState) {
 	model.call(this);
 
 	this.customURL = customURL;
 	this.id64 = id64;
 	this.id = id;
 	this.icon = icon;
+	
+	/*
+	3 - friendsonly, I'm a friend
+		public
+		private, it's me
+
+	2 - friendsonly, I'm not a friend
+
+	1 - private, I'm not me
+	*/
+	this.visibilityState = visibilityState || null;
 	
 	/*
 	Games this user owns - managed gameModels.

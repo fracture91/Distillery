@@ -1,6 +1,4 @@
 
-//todo: scroll to bottom when adding a user
-
 /*
 An aggregate for the list of selected users.
 Does not actually render itself - all necessary HTML is already under this.ref.
@@ -54,6 +52,7 @@ selectedPanel.prototype = {
 	onModelAdd: function(source, model) {
 		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
 		view.commit();
+		this.content.scrollTop = this.content.scrollHeight;
 		
 		if(model.games.employees.length==0) {
 			var that = this;

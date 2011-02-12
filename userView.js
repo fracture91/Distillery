@@ -31,6 +31,11 @@ userView.prototype = {
 		this.id64.innerText = id64 || null;
 	},
 	
+	setVisibilityState: function(state) {
+		if(state != null) this.ref.setAttribute("visibilitystate", state);
+		else this.ref.removeAttribute("visibilitystate");
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.icon = document.createElement("img");
@@ -57,6 +62,8 @@ userView.prototype = {
 			this.ref.appendChild(this.info);
 			this.ref.appendChild(this.clear);
 		}
+		
+		this.setVisibilityState(this.model.visibilityState);
 	},
 	
 	//Override
@@ -67,6 +74,7 @@ userView.prototype = {
 			if(changes.id) this.setId(changes.id);
 			if(changes.customURL) this.setCustomURL(changes.customURL);
 			if(changes.id64) this.setId64(changes.id64);
+			if(changes.visibilityState) this.setVisibilityState(changes.visibilityState);
 		}
 	}
 	
