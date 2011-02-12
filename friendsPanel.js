@@ -24,6 +24,7 @@ function friendsPanel() {
 		that.getFriends(userModelManager.add(model));
 	}, false);
 	
+	//add user to selectedUsers when clicked on
 	this.content.addEventListener("click", function(e) {
 		var target = e.target;
 		if(target) {
@@ -42,7 +43,7 @@ function friendsPanel() {
 friendsPanel.prototype = {
 
 	/*
-	Given a userModel, get the friends of this userModel and put them friendsPanel's model.
+	Given a userModel, get the friends of this userModel and put them into friendsPanel's model.
 	*/
 	getFriends: function(userModel) {
 		this.model.clear();

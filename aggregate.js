@@ -51,8 +51,9 @@ aggregate.prototype = {
 	
 	//Override
 	uncommit: function(){
+		//do this backwards
 		var employees = this.children.employees;
-		for(var i=0, len=employees.length; i<len; i++)
+		for(var i=employees.length-1; i>=0; i--)
 			employees[i].uncommit();
 	},
 	

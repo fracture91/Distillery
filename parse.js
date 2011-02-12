@@ -64,6 +64,9 @@ var Parse = new function() {
 	
 	}
 	
+	/*
+	Given an xml documentElement, add games in the document to the given manager as gameModels.
+	*/
 	this.gamesXML = function(manager, xml) {
 	
 		var games = this.getFirstByTagName(xml, "games");

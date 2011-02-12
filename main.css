@@ -128,6 +128,7 @@ min-height: 168px;
 
 #selected > .content {
 max-height: 168px;
+height: 168px;
 }
 
 #selected > .content > .user {

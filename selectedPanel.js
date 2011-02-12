@@ -17,7 +17,7 @@ function selectedPanel() {
 	var that = this;
 	
 	//todo: validation
-	//get the friends list of the id64/customURL that was inputted
+	//add the inputted user
 	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
 		e.preventDefault();
 		var input = e.target.getElementsByTagName("input")[0];
@@ -27,6 +27,7 @@ function selectedPanel() {
 		input.value = "";
 	}, false);
 	
+	//remove a user when they're clicked on
 	this.content.addEventListener("click", function(e) {
 		var target = e.target;
 		if(target) {
@@ -44,10 +45,16 @@ function selectedPanel() {
 
 selectedPanel.prototype = {
 
+	select: function(model) {
+		model.select();
+		gamesPanel.model.addMany(model.games.employees);
+	},
+
 	//Override
 	onModelAdd: function(source, model) {
 		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
 		view.commit();
+		
 		if(model.games.employees.length==0) {
 			var that = this;
 			Net.getUserGames(model, function(xhr) {
@@ -56,17 +63,12 @@ selectedPanel.prototype = {
 					employees[i].users.add(model);
 				//make sure this user wasn't removed in the meantime
 				if(that.model.find(model)) {
-					//todo: move to a helper method
-					model.select();
-					gamesPanel.addGames(model.games);
-					resize(window);
+					that.select(model);
 				}
 			});
 		}
 		else {
-			model.select();
-			gamesPanel.addGames(model.games);
-			resize(window);
+			this.select(model);
 		}
 	},
 	
@@ -74,14 +76,17 @@ selectedPanel.prototype = {
 	onModelRemove: function(source, model) {
 		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
 		model.deselect();
+		
 		//remove all of this user's games which no longer have any selected users
+		var toRemove = [];
 		var employees = model.games.employees;
 		for(var i=0, len=employees.length; i<len; i++)
 			if(employees[i].selectedUsersLength==0)
-				gamesPanel.model.remove(employees[i]);
+				toRemove.push(employees[i]);
+		gamesPanel.model.removeMany(toRemove);
+
 		view.uncommit();
-		resize(window);
-	}
+	},
 
 }
 
