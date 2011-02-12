@@ -58,35 +58,7 @@ gamesPanel.prototype = {
 			return that.defaultCompare(view1, view2);
 			});
 		this.commit();
-		//this.syncOrder();
 	},
-	
-	/*
-	Make sure that children appear in the document in the order they appear in their manager.
-	*/
-	/*syncOrder: function() {
-		//first we find the first childNode that is a view of ours
-		var childNodes = this.content.childNodes;
-		var previousViewRef;
-		for(var i=0, len=childNodes.length; i<len; i++) {
-			if(previousViewRef = this.findChildByRef(childNodes[i])) {
-				previousViewRef = previousViewRef.previousSibling;
-				break;
-				}
-		}
-		previousViewRef = previousViewRef || this.content.lastChild;
-		
-		//then, for each child, we make sure it follows (in the document) the previous view's ref
-		var children = this.children.employees;
-		for(var i=0, len=children.length; i<len; i++) {
-			if(!children[i].ref) children[i].render();
-			if(i==0 || !previousViewRef || children[i].ref.previousSibling!=previousViewRef) {
-				//move this child's ref so that it is after lastViewRef
-				this.content.insertBefore(children[i].ref, previousViewRef ? previousViewRef.nextSibling : null);
-			}
-			previousViewRef = children[i].ref;
-		}
-	},*/
 
 	//Override
 	onModelAdd: function(source, model, ignore) {
