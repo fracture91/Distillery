@@ -1,6 +1,4 @@
 
-//todo: "selected" property
-
 /*
 Manages all userModels.
 All userModels elsewhere in the app should point to objects in this manager.
@@ -54,6 +52,12 @@ function userModel(customURL, id64, id, icon, visibilityState) {
 	*/
 	this.fetchingUser = false;
 	this.fetchingGames = false;
+	
+	/*
+	Indicates that this user has been selected (intended for cosmetic use).
+	Not to be confused with this.select().
+	*/
+	this.selected = false;
 	
 	/*
 	Games this user owns - managed gameModels.

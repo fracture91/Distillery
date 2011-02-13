@@ -58,6 +58,7 @@ selectedPanel.prototype = {
 	//Override
 	onModelAdd: function(source, model) {
 		var view = this.children.add(userViewManager.add(new userView(this.content, model)));
+		view.model.change({selected: true});
 		view.commit();
 		this.content.scrollTop = this.content.scrollHeight;
 		
@@ -100,6 +101,7 @@ selectedPanel.prototype = {
 		gamesPanel.model.removeMany(toRemove);
 
 		view.uncommit();
+		view.model.change({selected: false});
 	},
 
 }

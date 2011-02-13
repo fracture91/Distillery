@@ -47,6 +47,11 @@ userView.prototype = {
 		this.ref.setAttribute("fetchinggames", state);
 	},
 	
+	setSelected: function(state) {
+		if(state) addClass(this.ref, "selected");
+		else removeClass(this.ref, "selected");
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.icon = document.createElement("img");
@@ -77,6 +82,7 @@ userView.prototype = {
 		this.setVisibilityState(this.model.visibilityState);
 		this.setFetchingUser(this.model.fetchingUser);
 		this.setFetchingGames(this.model.fetchingGames);
+		this.setSelected(this.model.selected);
 	},
 	
 	//Override
@@ -90,6 +96,7 @@ userView.prototype = {
 			if(changes.visibilityState) this.setVisibilityState(changes.visibilityState);
 			if(defined(changes.fetchingUser)) this.setFetchingUser(changes.fetchingUser);
 			if(defined(changes.fetchingGames)) this.setFetchingGames(changes.fetchingGames);
+			if(defined(changes.selected)) this.setSelected(changes.selected);
 		}
 	}
 	
