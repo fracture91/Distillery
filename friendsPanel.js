@@ -13,16 +13,33 @@ function friendsPanel() {
 	this.content = this.ref.getElementsByClassName("content")[0];
 	this.fitAncestor = document.body.getElementsByTagName("div")[0];
 	
+	this.getFriendsForm = this.ref.getElementsByTagName("form")[0];
+	this.getFriendsInput = this.getFriendsForm.getElementsByTagName("input")[0];
+	this.invalidStr = "Invalid Identifier";
+	
 	var that = this;
 	
-	//todo: validation
 	//get the friends list of the id64/customURL that was inputted
-	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
+	this.getFriendsForm.addEventListener("submit", function(e) {
 		e.preventDefault();
-		var val = e.target.getElementsByTagName("input")[0].value;
+		var val = that.getFriendsInput.value;
 		var model = userModel.prototype.modelFromString(val);
-		that.getFriends(userModelManager.add(model));
+		if(model) {
+			that.getFriends(userModelManager.add(model));
+		}
+		else {
+			that.getFriendsInput.value = that.invalidStr;
+		}
 	}, false);
+	
+	this.clearInputHandler = function(e) {
+		if(e.target.value==that.invalidStr)
+			e.target.value = "";
+	}
+	
+	this.getFriendsInput.addEventListener("focus", this.clearInputHandler, false);
+	this.getFriendsInput.addEventListener("click", this.clearInputHandler, false);
+	this.getFriendsInput.addEventListener("keydown", this.clearInputHandler, false);
 	
 	//add user to selectedUsers when clicked on
 	this.content.addEventListener("click", function(e) {

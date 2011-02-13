@@ -76,12 +76,14 @@ userModel.prototype = {
 	
 	modelFromString: function(str) {
 		
-		if(/\d{17}/.test(str)) {
+		if(this.validId64Exp.test(str)) {
 			return new userModel(undefined, str);
 		}
-		else {
+		else if(this.validIdExp.test(str)){
 			return new userModel(str);
 		}
+		
+		return null;
 		
 	},
 	
@@ -89,6 +91,16 @@ userModel.prototype = {
 		if(defined(this.id) && this.id!="") return this.id;
 		if(defined(this.customURL) && this.customURL!="") return this.customURL;
 		if(defined(this.id64) && this.id64!="") return this.id64;
+	},
+	
+	validId64Exp: /^\d{17}$/,
+	validateId64: function(id64) {
+		return this.validId64Exp.test(id64) ? id64 : "00000000000000000";
+	},
+	
+	validIdExp: /^[\w\-]{2,32}$/,
+	validateId: function(id) {
+		return this.validIdExp.test(id) ? id : "error";
 	},
 	
 	/*

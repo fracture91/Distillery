@@ -14,18 +14,26 @@ function selectedPanel() {
 	this.ref = ref;
 	this.content = this.ref.getElementsByClassName("content")[0];
 	
+	this.selectUserForm = this.ref.getElementsByTagName("form")[0];
+	this.selectUserInput = this.selectUserForm.getElementsByTagName("input")[0];
+	this.invalidStr = friendsPanel.invalidStr;
+	
 	var that = this;
 	
-	//todo: validation
 	//add the inputted user
-	this.ref.getElementsByTagName("form")[0].addEventListener("submit", function(e) {
+	this.selectUserForm.addEventListener("submit", function(e) {
 		e.preventDefault();
-		var input = e.target.getElementsByTagName("input")[0];
-		var val = input.value;
+		var val = that.selectUserInput.value;
 		var model = userModel.prototype.modelFromString(val);
-		that.model.add(userModelManager.add(model));
-		input.value = "";
+		if(model) {
+			that.model.add(userModelManager.add(model));
+		}
+		that.selectUserInput.value = model ? "" : that.invalidStr;
 	}, false);
+	
+	this.selectUserInput.addEventListener("focus", friendsPanel.clearInputHandler, false);
+	this.selectUserInput.addEventListener("click", friendsPanel.clearInputHandler, false);
+	this.selectUserInput.addEventListener("keydown", friendsPanel.clearInputHandler, false);
 	
 	//remove a user when they're clicked on
 	this.content.addEventListener("click", function(e) {
