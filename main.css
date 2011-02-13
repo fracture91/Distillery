@@ -82,12 +82,16 @@ margin: 7px 0;
 .help {
 display: none;
 clear: both;
-margin: 5px;
-text-align: center;
+margin: 0 auto;
+padding: 5px;
+text-align: left;
+max-width: 600px;
+line-height: 1.4em;
 }
 
 .help > code {
 display: block;
+text-align: center;
 }
 
 .help strong {
@@ -123,7 +127,7 @@ min-height: 210px;
 }
 
 #friends > .content {
-min-height: 168px;
+min-height: 261px;
 }
 
 #selected > .content {
