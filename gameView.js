@@ -1,6 +1,4 @@
 
-//todo: allow user to display selected users who own and don't own this game
-
 /*
 Manages all gameViews.
 */
@@ -11,6 +9,15 @@ Renders the information contained by a gameModel.
 */
 function gameView(parent, model) {
 	view.call(this, parent, model);
+	
+	var showOwnership = false;
+	this.__defineGetter__("showOwnership", function() { return showOwnership });
+	this.__defineSetter__("showOwnership", function(b) { 
+		if(b!=showOwnership) {
+			this.toggleShowOwnership();
+			showOwnership = !showOwnership;
+		}
+	});
 }
 
 gameView.prototype = {
@@ -50,7 +57,6 @@ gameView.prototype = {
 			this.storeLink = document.createElement("a");
 			this.storeLink.innerText = "Store Page";
 			this.id = document.createElement("h6");
-			this.sharedAmong = document.createElement("h5");
 		}
 		
 		this.setLogo(this.model.logo);
@@ -64,12 +70,17 @@ gameView.prototype = {
 			this.info = document.createElement("div");
 			this.clear = document.createElement("div");
 			addClass(this.clear, "clear");
+			this.sharedAmong = document.createElement("a");
+			this.sharedAmong.href = "";
+			this.ownership = document.createElement("div");
+			addClass(this.ownership, "ownership");
 			this.ref.appendChild(this.logo);
 			this.info.appendChild(this.name);
 			this.info.appendChild(this.storeLink);
 			this.info.appendChild(this.id);
 			this.info.appendChild(this.sharedAmong);
 			this.ref.appendChild(this.info);
+			this.ref.appendChild(this.ownership);
 			this.ref.appendChild(this.clear);
 		}
 		
@@ -88,8 +99,44 @@ gameView.prototype = {
 			if(defined(changes.selectedUsersLength)) this.setSharedAmong(changes.selectedUsersLength);
 			if(defined(changes.selectedUsersLackingLength)) this.setNotSharedAmong(changes.selectedUsersLackingLength);
 		}
+	},
+	
+	/*
+	Helper for the showOwnership getter.
+	*/
+	toggleShowOwnership: function() {
+		if(!this.ref) this.render();
+		if(!this.showOwnership) {
+			this.ownership.style.display = "block";
+			this.selectedUsers = new simpleUserAggregate(this.ownership, this.model.selectedUsers);
+			this.selectedUsersLacking = new simpleUserAggregate(this.ownership, this.model.selectedUsersLacking);
+			this.selectedUsers.commit();
+			this.selectedUsersLacking.commit();
+		}
+		else {
+			this.ownership.style.display = null;
+			this.selectedUsers.uncommit();
+			this.selectedUsersLacking.uncommit();
+			delete this.selectedUsers;
+			delete this.selectedUsersLacking;
+		}
 	}
 	
 }
 
 extend(gameView, view);
+
+document.addEventListener("click", function(e) {
+	var target = e.target;
+	if(target.tagName=="A") {
+		var viewRef = getParentByClassName(target, "game");
+		if(viewRef) {
+			gameViewManager.children = gameViewManager;
+			var view = aggregate.prototype.findChildByRef.call(gameViewManager, viewRef);
+			if(view && target == view.sharedAmong) {
+				e.preventDefault();
+				view.showOwnership = !view.showOwnership;
+			}
+		}
+	}
+}, true);

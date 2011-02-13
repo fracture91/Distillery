@@ -68,6 +68,15 @@ function replaceClass(obj,className,newClassName) {
 	addClass(obj,newClassName);
 	return true;
 }
+
+function getParentByClassName(el, name, depth) {
+	if(typeof depth != "number") depth = -1;
+	if(depth == 0) return null;
+	var p = el.parentNode;
+	if(!p || p.tagName == 'HTML') return null;
+	else if(hasClass(p, name)) return p;
+	else return getParentByClassName(p, name, depth-1);
+	}
 	
 function fixHelpDivs() {
 	var helps = document.getElementsByClassName("help");

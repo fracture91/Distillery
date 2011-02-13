@@ -1,4 +1,6 @@
 
+//todo: bookmark groups of selected users
+
 /*
 An aggregate for the list of selected users.
 Does not actually render itself - all necessary HTML is already under this.ref.

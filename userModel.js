@@ -85,6 +85,12 @@ userModel.prototype = {
 		
 	},
 	
+	get bestName() {
+		if(defined(this.id) && this.id!="") return this.id;
+		if(defined(this.customURL) && this.customURL!="") return this.customURL;
+		if(defined(this.id64) && this.id64!="") return this.id64;
+	},
+	
 	/*
 	For each game in this.games, add this to game.selectedUsers.
 	*/

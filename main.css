@@ -276,25 +276,71 @@ font-weight: inherit;
 font-size: 0.7em;
 }
 
-.game > div > h5 {
-margin: 0;
-margin-top: 8px;
+.game > div > a:last-child {
+display: block;
+margin-top: 7px;
 }
 
-.game > div > h5:after {
+.game > div > a:last-child:after {
 content: attr(sharedamong) " people own this game, " attr(notsharedamong) " don't";
 }
 
-.game > div > h5[sharedamong="1"]:after {
+.game > div > a[sharedamong="1"]:after {
 content: attr(sharedamong) " person owns this game, " attr(notsharedamong) " don't";
 }
 
-.game > div > h5[notsharedamong="1"]:after {
+.game > div > a[notsharedamong="1"]:after {
 content: attr(sharedamong) " people own this game, " attr(notsharedamong) " doesn't";
 }
 
-.game > div > h5[sharedamong="1"][notsharedamong="1"]:after {
+.game > div > a[sharedamong="1"][notsharedamong="1"]:after {
 content: attr(sharedamong) " person owns this game, " attr(notsharedamong) " doesn't";
+}
+
+.game > .ownership {
+clear: left;
+float: none;
+background-color: #161616;
+border: 1px solid black;
+border-radius: 3px;
+display: none;
+padding: 5px;
+margin: 0 3px;
+/*Yucky hack to just get some top margin*/
+position: relative;
+top: 5px;
+margin-bottom: 8px;
+}
+
+.game > .ownership > ul {
+overflow: auto;
+display: block;
+border-radius: 2px;
+margin: 5px;
+padding: 5px;
+}
+
+.game > .ownership > ul:first-child {
+background-color: #153215;
+}
+
+.game > .ownership > ul:last-child {
+background-color: #321515;
+}
+
+.game > .ownership > ul > li {
+list-style-type: none;
+float: left;
+margin: 0;
+}
+
+.game > .ownership > ul > li:after {
+content: ",";
+margin-right: 4px;
+}
+
+.game > .ownership > ul > li:last-child:after {
+content: none;
 }
 
 .user a, .game a {
