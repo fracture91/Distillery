@@ -61,12 +61,14 @@ selectedPanel.prototype = {
 		view.commit();
 		this.content.scrollTop = this.content.scrollHeight;
 		
-		if(model.games.employees.length==0) {
+		if(!model.fetchingGames && model.games.employees.length==0) {
 			var that = this;
+			model.change({fetchingGames: true});
 			Net.getUserGames(model, function(xhr) {
 				var employees = model.games.employees;
 				for(var i=0, len=employees.length; i<len; i++)
 					employees[i].users.add(model);
+				model.change({fetchingGames: false});
 				//make sure this user wasn't removed in the meantime
 				if(that.model.find(model)) {
 					that.select(model);

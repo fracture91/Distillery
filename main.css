@@ -158,6 +158,22 @@ border-color: black;
 border-color: #aa5000;
 }
 
+.user[fetchinguser="true"] {
+border-color: #111;
+}
+
+.user[fetchinguser="true"] > img {
+border-style: dashed;
+}
+
+.user[fetchinggames="true"] {
+border-style: dotted;
+}
+
+.user[fetchinggames="true"] > img {
+border-style: dotted;
+}
+
 .user {
 cursor: pointer;
 }

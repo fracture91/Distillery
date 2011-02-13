@@ -1,6 +1,4 @@
 
-//todo: "fetching" property that indicates info is being fetched from network
-
 /*
 Class for a model - holds some information which a view can then display.
 Note that a model might not hold all necessary information when it's used -

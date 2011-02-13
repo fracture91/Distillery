@@ -39,6 +39,14 @@ userView.prototype = {
 		else this.ref.removeAttribute("visibilitystate");
 	},
 	
+	setFetchingUser: function(state) {
+		this.ref.setAttribute("fetchinguser", state);
+	},
+	
+	setFetchingGames: function(state) {
+		this.ref.setAttribute("fetchinggames", state);
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.icon = document.createElement("img");
@@ -67,6 +75,8 @@ userView.prototype = {
 		}
 		
 		this.setVisibilityState(this.model.visibilityState);
+		this.setFetchingUser(this.model.fetchingUser);
+		this.setFetchingGames(this.model.fetchingGames);
 	},
 	
 	//Override
@@ -78,6 +88,8 @@ userView.prototype = {
 			if(changes.customURL) this.setCustomURL(changes.customURL);
 			if(changes.id64) this.setId64(changes.id64);
 			if(changes.visibilityState) this.setVisibilityState(changes.visibilityState);
+			if(defined(changes.fetchingUser)) this.setFetchingUser(changes.fetchingUser);
+			if(defined(changes.fetchingGames)) this.setFetchingGames(changes.fetchingGames);
 		}
 	}
 	

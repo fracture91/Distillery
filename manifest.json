@@ -7,7 +7,7 @@
 	"minimum_chrome_version": "9.0.597.84",
 
 	"permissions": [
-		"http://steamcommunity.com/*"
+		"https://steamcommunity.com/*"
 	],
 	
 	"app": {

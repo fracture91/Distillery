@@ -68,7 +68,7 @@ gamesPanel.prototype = {
 		var soleOwner = model.selectedUsers.employees[0];
 		var users = selectedPanel.model.employees;
 		for(var i=0, len=users.length; i<len; i++) {
-			if(users[i] != soleOwner && users[i].games.employees.length!=0) {
+			if(users[i] != soleOwner && !users[i].fetchingGames && users[i].games.employees.length!=0) {
 				model.selectedUsersLacking.add(users[i]);
 			}
 		}

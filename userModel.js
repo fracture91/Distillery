@@ -7,18 +7,18 @@ All userModels elsewhere in the app should point to objects in this manager.
 */
 function userModelManager() {
 	manager.call(this);
-
+	//listen to myself so I can hear events fired by manager
+	this.listen(this);
 }
 
 userModelManager.prototype = {
-	//Override
-	add: function(employee) {
-		newEmployee = manager.prototype.add.call(this, employee);
-		if(newEmployee.equals(employee)) {
-			//the added user didn't already exist - we should request more info from network
-			Net.getUserModel(newEmployee);
-		}
-		return newEmployee;
+	
+	onModelAdd: function(source, model) {
+		//the added user didn't already exist - we should request more info from network
+		model.change({fetchingUser: true});
+		Net.getUserModel(model, function(xhr){
+			model.change({fetchingUser: false});
+		});
 	}
 }
 
@@ -48,6 +48,12 @@ function userModel(customURL, id64, id, icon, visibilityState) {
 	1 - private, I'm not me
 	*/
 	this.visibilityState = visibilityState || null;
+	
+	/*
+	Indicates info is being fetched from network.
+	*/
+	this.fetchingUser = false;
+	this.fetchingGames = false;
 	
 	/*
 	Games this user owns - managed gameModels.
@@ -95,7 +101,7 @@ userModel.prototype = {
 		}
 	},
 	
-	profileURLPrefix: "http://steamcommunity.com/",
+	profileURLPrefix: "https://steamcommunity.com/",
 	profileURLId: "id/",
 	profileURLProfile: "profiles/",
 	profileURLGames: "games?tab=all",
