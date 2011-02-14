@@ -28,7 +28,8 @@ var Parse = new function() {
 		id64: "steamID64",
 		customURL: "customURL",
 		icon: "avatarMedium",
-		visibilityState: "visibilityState"
+		visibilityState: "visibilityState",
+		onlineState: "onlineState"
 	}
 	
 	/*

@@ -60,6 +60,10 @@ userView.prototype = {
 		this.profileLink.href = url;
 	},
 	
+	setOnlineState: function(state) {
+		this.ref.setAttribute("onlinestate", state);
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.icon = document.createElement("img");
@@ -91,6 +95,7 @@ userView.prototype = {
 			this.ref.appendChild(this.clear);
 		}
 		
+		this.setOnlineState(this.model.onlineState);
 		this.setVisibilityState(this.model.visibilityState);
 		this.setFetchingUser(this.model.fetchingUser);
 		this.setFetchingGames(this.model.fetchingGames);
@@ -114,6 +119,7 @@ userView.prototype = {
 			if(defined(changes.fetchingUser)) this.setFetchingUser(changes.fetchingUser);
 			if(defined(changes.fetchingGames)) this.setFetchingGames(changes.fetchingGames);
 			if(defined(changes.selected)) this.setSelected(changes.selected);
+			if(defined(changes.onlineState)) this.setOnlineState(changes.onlineState);
 		}
 	}
 	

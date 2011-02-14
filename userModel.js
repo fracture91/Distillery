@@ -30,7 +30,7 @@ userModelManager = new userModelManager();
 /*
 Holds information about a user.
 */
-function userModel(customURL, id64, id, icon, visibilityState) {
+function userModel(customURL, id64, id, icon, visibilityState, onlineState) {
 	model.call(this);
 
 	this.customURL = customURL;
@@ -48,6 +48,11 @@ function userModel(customURL, id64, id, icon, visibilityState) {
 	1 - private, I'm not me
 	*/
 	this.visibilityState = visibilityState || null;
+	
+	/*
+	in-game, online, or offline
+	*/
+	this.onlineState = onlineState || null;
 	
 	/*
 	Indicates info is being fetched from network.
