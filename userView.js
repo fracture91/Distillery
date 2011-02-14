@@ -1,6 +1,6 @@
 
 //todo: chat link
-//todo: show online state
+//todo: friends button
 //todo: wrap profile images with links for keyboard accessibility so you can
 //		tab over to an image and press enter to (de)select it
 //todo: button to show this user's owned games

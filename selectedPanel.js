@@ -1,6 +1,5 @@
 
 //todo: bookmark groups of selected users
-//todo: clear button
 
 /*
 An aggregate for the list of selected users.
@@ -17,6 +16,7 @@ function selectedPanel() {
 	
 	this.selectUserForm = this.ref.getElementsByTagName("form")[0];
 	this.selectUserInput = this.selectUserForm.getElementsByTagName("input")[0];
+	this.clearButton = this.selectUserForm.getElementsByTagName("input")[2];
 	this.invalidStr = friendsPanel.invalidStr;
 	
 	var that = this;
@@ -35,6 +35,17 @@ function selectedPanel() {
 	this.selectUserInput.addEventListener("focus", friendsPanel.clearInputHandler, false);
 	this.selectUserInput.addEventListener("click", friendsPanel.clearInputHandler, false);
 	this.selectUserInput.addEventListener("keydown", friendsPanel.clearInputHandler, false);
+	
+	this.clearButton.addEventListener("click", function(e) {
+		/*
+		This can take a while if there are tons of users...
+		I tried writing a faster way to do it but it was only faster for very large sets
+		of selected users (probably by 50 users).
+		The chances of anyone seriously using this app to check common games between >50
+		people are pretty slim, I would think, so I'm going with the clearer solution.
+		*/
+		that.model.clear();
+	}, false);
 	
 	//remove a user when they're clicked on
 	this.content.addEventListener("click", function(e) {
