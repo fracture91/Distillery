@@ -1,4 +1,5 @@
 
+//todo: link to profile page
 //todo: refresh button
 //todo: button to show this user's owned games
 

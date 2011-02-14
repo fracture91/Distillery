@@ -1,4 +1,6 @@
 
+//todo: clear button
+
 /*
 An aggregate for the friends list.
 Does not actually render itself - all necessary HTML is already under this.ref.
@@ -33,7 +35,7 @@ function friendsPanel() {
 	}, false);
 	
 	this.clearInputHandler = function(e) {
-		if(e.target.value==that.invalidStr)
+		if(e.target.value==that.invalidStr || e.target.value==Net.profileNotFoundDisplay)
 			e.target.value = "";
 	}
 	
@@ -64,7 +66,12 @@ friendsPanel.prototype = {
 	*/
 	getFriends: function(userModel) {
 		this.model.clear();
-		Net.getUserFriends(userModel, this.model);
+		var that = this;
+		Net.getUserFriends(userModel, this.model, function(xhr, error) {
+			if(error){
+				that.getFriendsInput.value = error == Net.profileNotFoundError ? Net.profileNotFoundDisplay : error;
+			}
+		});
 	},
 
 	//Override

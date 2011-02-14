@@ -6,6 +6,9 @@ Singleton for doing stuff on the network.
 */
 var Net = new function() {
 
+	this.profileNotFoundError = "The specified profile could not be found.";
+	this.profileNotFoundDisplay = "Profile not found";
+
 	/*
 	A simple wrapper for XMLHttpRequest.
 	Similar to GM_xmlhttprequest.
@@ -49,10 +52,12 @@ var Net = new function() {
 			url: model.profileURLXML,
 			onload: function(xhr) {
 				var xml = xhr.responseXML;
+				var error;
 				if(xml) {
 					Parse.userModelXML(model, xml.documentElement);
+					error = Parse.error(xml);
 				}
-				callback(xhr);
+				callback(xhr, error);
 			},
 			onerror: function(xhr) {
 				callback(xhr);
@@ -72,10 +77,12 @@ var Net = new function() {
 			url: model.friendsURLXML,
 			onload: function(xhr) {
 				var xml = xhr.responseXML;
+				var error;
 				if(xml) {
 					Parse.friendsXML(manager, xml.documentElement);
+					error = Parse.error(xml);
 				}
-				callback(xhr);
+				callback(xhr, error);
 			},
 			onerror: function(xhr) {
 				callback(xhr);
@@ -95,10 +102,12 @@ var Net = new function() {
 			url: model.gamesURLXML,
 			onload: function(xhr) {
 				var xml = xhr.responseXML;
+				var error;
 				if(xml) {
 					Parse.gamesXML(model.games, xml.documentElement);
+					error = Parse.error(xml);
 				}
-				callback(xhr);
+				callback(xhr, error);
 			},
 			onerror: function(xhr) {
 				callback(xhr);

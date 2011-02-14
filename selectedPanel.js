@@ -1,5 +1,6 @@
 
 //todo: bookmark groups of selected users
+//todo: clear button
 
 /*
 An aggregate for the list of selected users.

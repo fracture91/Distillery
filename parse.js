@@ -85,5 +85,13 @@ var Parse = new function() {
 		}
 	
 	}
+	
+	/*
+	Given an XML documentElement, check if this is just an error response.
+	If so, return error message, otherwise return null.
+	*/
+	this.error = function(xml) {
+		return this.getFirstContentByTagName(xml, "error");
+	}
 
 }

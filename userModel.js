@@ -14,8 +14,10 @@ userModelManager.prototype = {
 	onModelAdd: function(source, model) {
 		//the added user didn't already exist - we should request more info from network
 		model.change({fetchingUser: true});
-		Net.getUserModel(model, function(xhr){
+		Net.getUserModel(model, function(xhr, error){
 			model.change({fetchingUser: false});
+			//change the id to indicate the error
+			if(error) model.change({id: (error == Net.profileNotFoundError ? Net.profileNotFoundDisplay : error)});
 		});
 	}
 }
