@@ -3,7 +3,6 @@
 //todo: instead, allow user to set tolerance for how many people can't play
 //todo: allow user to ignore games forever (like single player games)
 //todo: select random game
-//todo: recommend button
 
 /*
 An aggregate for the list of owned games.

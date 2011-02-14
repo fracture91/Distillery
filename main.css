@@ -350,3 +350,7 @@ content: none;
 .user a, .game a {
 font-size: smaller;
 }
+
+.user > div > a {
+font-size: 0.7em;
+}

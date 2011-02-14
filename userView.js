@@ -1,7 +1,10 @@
 
-//todo: link to profile page
-//todo: refresh button
+//todo: chat link
+//todo: show online state
+//todo: wrap profile images with links for keyboard accessibility so you can
+//		tab over to an image and press enter to (de)select it
 //todo: button to show this user's owned games
+//todo: refresh button
 
 /*
 Manages all userViews.
@@ -53,18 +56,25 @@ userView.prototype = {
 		else removeClass(this.ref, "selected");
 	},
 	
+	setProfileLink: function(url) {
+		this.profileLink.href = url;
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.icon = document.createElement("img");
 			this.id = document.createElement("h4");
 			this.customURL = document.createElement("h6");
 			this.id64 = document.createElement("h6");
+			this.profileLink = document.createElement("a");
+			this.profileLink.textContent = "Profile";
 		}
 		
 		this.setIcon(this.model.icon);
 		this.setId(this.model.id);
 		this.setCustomURL(this.model.customURL);
 		this.setId64(this.model.id64);
+		this.setProfileLink(this.model.profileURL);
 		
 		if(!this.ref) {
 			this.ref = document.createElement("div");
@@ -76,6 +86,7 @@ userView.prototype = {
 			this.info.appendChild(this.id);
 			this.info.appendChild(this.customURL);
 			this.info.appendChild(this.id64);
+			this.info.appendChild(this.profileLink);
 			this.ref.appendChild(this.info);
 			this.ref.appendChild(this.clear);
 		}
@@ -94,6 +105,11 @@ userView.prototype = {
 			if(changes.id) this.setId(changes.id);
 			if(changes.customURL) this.setCustomURL(changes.customURL);
 			if(changes.id64) this.setId64(changes.id64);
+			if(changes.customURL || changes.id64) {
+				this.model.customURL = changes.customURL || this.model.customURL;
+				this.model.id64 = changes.id64 || this.model.id64;
+				this.setProfileLink(this.model.profileURL);
+				}
 			if(changes.visibilityState) this.setVisibilityState(changes.visibilityState);
 			if(defined(changes.fetchingUser)) this.setFetchingUser(changes.fetchingUser);
 			if(defined(changes.fetchingGames)) this.setFetchingGames(changes.fetchingGames);

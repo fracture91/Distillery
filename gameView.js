@@ -1,4 +1,6 @@
 
+//todo: recommend button
+
 /*
 Manages all gameViews.
 */
