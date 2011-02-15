@@ -1,6 +1,4 @@
 
-//todo: recommend button
-
 /*
 Manages all gameViews.
 */
@@ -52,18 +50,32 @@ gameView.prototype = {
 		this.ref.setAttribute("notsharedamong", num);
 	},
 	
+	setRecommend: function(id) {
+		this.recommend.href = "http://store.steampowered.com/recommended/recommendgame/" + id;
+	},
+	
+	setPlay: function(id) {
+		this.play.href = "steam://run/" + id;
+	},
+	
 	render: function() {
 		if(!this.ref) {
 			this.logo = document.createElement("img");
 			this.name = document.createElement("h4");
 			this.storeLink = document.createElement("a");
 			this.storeLink.innerText = "Store Page";
+			this.recommend = document.createElement("a");
+			this.recommend.innerText = "Recommend";
+			this.play = document.createElement("a");
+			this.play.innerText = "Play Now";
 			this.id = document.createElement("h6");
 		}
 		
 		this.setLogo(this.model.logo);
 		this.setName(this.model.name);
 		this.setStoreLink(this.model.storeLink);
+		this.setRecommend(this.model.id);
+		this.setPlay(this.model.id);
 		this.setId(this.model.id);
 		
 		if(!this.ref) {
@@ -79,6 +91,8 @@ gameView.prototype = {
 			this.ref.appendChild(this.logo);
 			this.info.appendChild(this.name);
 			this.info.appendChild(this.storeLink);
+			this.info.appendChild(this.recommend);
+			this.info.appendChild(this.play);
 			this.info.appendChild(this.id);
 			this.info.appendChild(this.sharedAmong);
 			this.ref.appendChild(this.info);
@@ -97,7 +111,11 @@ gameView.prototype = {
 			if(changes.logo) this.setLogo(changes.logo);
 			if(changes.name) this.setName(changes.name);
 			if(changes.storeLink) this.setStoreLink(changes.storeLink);
-			if(changes.id) this.setId(changes.id);
+			if(changes.id) {
+				this.setId(changes.id);
+				this.setRecommend(changes.id);
+				this.setPlay(changes.id);
+			}
 			if(defined(changes.selectedUsersLength)) this.setSharedAmong(changes.selectedUsersLength);
 			if(defined(changes.selectedUsersLackingLength)) this.setNotSharedAmong(changes.selectedUsersLackingLength);
 		}

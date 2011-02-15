@@ -1,6 +1,5 @@
 
-//todo: chat link
-//todo: friends button
+//todo: intercept friends button to use friendsPanel
 //todo: wrap profile images with links for keyboard accessibility so you can
 //		tab over to an image and press enter to (de)select it
 //todo: button to show this user's owned games
@@ -60,6 +59,14 @@ userView.prototype = {
 		this.profileLink.href = url;
 	},
 	
+	setChat: function(id) {
+		this.chat.href = "steam://friends/message/" + id;
+	},
+	
+	setFriends: function(profileURL) {
+		this.friends.href = profileURL + "/friends";
+	},
+	
 	setOnlineState: function(state) {
 		this.ref.setAttribute("onlinestate", state);
 	},
@@ -72,6 +79,10 @@ userView.prototype = {
 			this.id64 = document.createElement("h6");
 			this.profileLink = document.createElement("a");
 			this.profileLink.textContent = "Profile";
+			this.chat = document.createElement("a");
+			this.chat.textContent = "Chat";
+			this.friends = document.createElement("a");
+			this.friends.textContent = "Friends";
 		}
 		
 		this.setIcon(this.model.icon);
@@ -79,6 +90,8 @@ userView.prototype = {
 		this.setCustomURL(this.model.customURL);
 		this.setId64(this.model.id64);
 		this.setProfileLink(this.model.profileURL);
+		this.setChat(this.model.id64);
+		this.setFriends(this.model.profileURL);
 		
 		if(!this.ref) {
 			this.ref = document.createElement("div");
@@ -91,6 +104,8 @@ userView.prototype = {
 			this.info.appendChild(this.customURL);
 			this.info.appendChild(this.id64);
 			this.info.appendChild(this.profileLink);
+			this.info.appendChild(this.chat);
+			this.info.appendChild(this.friends);
 			this.ref.appendChild(this.info);
 			this.ref.appendChild(this.clear);
 		}
@@ -109,11 +124,15 @@ userView.prototype = {
 			if(changes.icon) this.setIcon(changes.icon);
 			if(changes.id) this.setId(changes.id);
 			if(changes.customURL) this.setCustomURL(changes.customURL);
-			if(changes.id64) this.setId64(changes.id64);
+			if(changes.id64) {
+				this.setId64(changes.id64);
+				this.setChat(changes.id64);
+			}
 			if(changes.customURL || changes.id64) {
 				this.model.customURL = changes.customURL || this.model.customURL;
 				this.model.id64 = changes.id64 || this.model.id64;
 				this.setProfileLink(this.model.profileURL);
+				this.setFriends(this.model.profileURL);
 				}
 			if(changes.visibilityState) this.setVisibilityState(changes.visibilityState);
 			if(defined(changes.fetchingUser)) this.setFetchingUser(changes.fetchingUser);

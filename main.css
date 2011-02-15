@@ -288,6 +288,10 @@ font-weight: inherit;
 font-size: 0.7em;
 }
 
+.game > div > a + a {
+margin-left: 10px;
+}
+
 .game > div > a:last-child {
 display: block;
 margin-top: 7px;
@@ -361,4 +365,8 @@ font-size: smaller;
 
 .user > div > a {
 font-size: 0.7em;
+}
+
+.user > div > a + a {
+margin-left: 5px;
 }
