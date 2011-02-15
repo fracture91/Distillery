@@ -1,6 +1,7 @@
 
 //todo: allow user to choose not to display games that the entire group can't play
 //todo: instead, allow user to set tolerance for how many people can't play
+//todo: show number of games hidden for above reasons with :before/:after on .content
 //todo: allow user to ignore games forever (like single player games)
 //todo: select random game
 

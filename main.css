@@ -64,6 +64,27 @@ input[type="text"] {
 background-color: #161616;
 border: 1px solid #777777;
 color: #e1e1e1;
+border-radius: 2px;
+}
+
+input[type="submit"], input[type="button"] {
+background-color: #4A4846;
+background: -webkit-gradient(linear, left top, left bottom, from(rgba(92,89,86, 1)), to(rgba(74,72,70, 1)));
+color: #D1CFCD;
+border: 1px solid #706D69;
+text-transform: uppercase;
+font-size: 0.6em;
+height: 20px;
+position: relative;
+top: -2px;
+padding: 0 5px;
+border-radius: 2px;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover,
+input[type="submit"]:focus, input[type="button"]:focus {
+border-color: #99938D;
+background: -webkit-gradient(linear, left top, left bottom, from(rgba(105,102,99, 1)), to(rgba(75,73,71, 1)));
 }
 
 h2 {
@@ -127,7 +148,7 @@ min-height: 210px;
 }
 
 #friends > .content {
-min-height: 261px;
+min-height: 263px;
 }
 
 #selected > .content {
