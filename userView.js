@@ -1,5 +1,4 @@
 
-//todo: intercept friends button to use friendsPanel
 //todo: wrap profile images with links for keyboard accessibility so you can
 //		tab over to an image and press enter to (de)select it
 //todo: button to show this user's owned games
@@ -145,3 +144,23 @@ userView.prototype = {
 }
 
 extend(userView, view);
+
+//hijack the friends link so it will use the friendsPanel instead
+document.addEventListener("click", function(e) {
+	var target = e.target;
+	if(target.tagName=="A") {
+		var viewRef = getParentByClassName(target, "user");
+		if(viewRef) {
+			userViewManager.children = userViewManager;
+			var view = aggregate.prototype.findChildByRef.call(userViewManager, viewRef);
+			if(view && target == view.friends) {
+				e.preventDefault();
+				var identifier = target.href;
+				var end = identifier.lastIndexOf("/friends");
+				var start = identifier.lastIndexOf("/", end-8) + 1;
+				identifier = identifier.slice(start, end);
+				friendsPanel.getFriendsFromString(identifier);
+			}
+		}
+	}
+}, true);

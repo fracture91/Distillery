@@ -24,14 +24,7 @@ function friendsPanel() {
 	//get the friends list of the id64/customURL that was inputted
 	this.getFriendsForm.addEventListener("submit", function(e) {
 		e.preventDefault();
-		var val = that.getFriendsInput.value;
-		var model = userModel.prototype.modelFromString(val);
-		if(model) {
-			that.getFriends(userModelManager.add(model));
-		}
-		else {
-			that.getFriendsInput.value = that.invalidStr;
-		}
+		that.getFriendsFromString(that.getFriendsInput.value);
 	}, false);
 	
 	this.clearInputHandler = function(e) {
@@ -72,6 +65,17 @@ friendsPanel.prototype = {
 				that.getFriendsInput.value = error == Net.profileNotFoundError ? Net.profileNotFoundDisplay : error;
 			}
 		});
+	},
+	
+	getFriendsFromString: function(str) {
+		this.getFriendsInput.value = str;
+		var model = userModel.prototype.modelFromString(str);
+		if(model) {
+			this.getFriends(userModelManager.add(model));
+		}
+		else {
+			this.getFriendsInput.value = this.invalidStr;
+		}
 	},
 
 	//Override
