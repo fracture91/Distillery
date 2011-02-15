@@ -1,6 +1,4 @@
 
-//todo: always open external links in new tab
-
 window.onload = function() {
 
 	friendsPanel = new friendsPanel();
@@ -15,5 +13,13 @@ window.onload = function() {
 	}
 	fitPanels();
 	window.addEventListener("resize", fitPanels, true);
+	
+	document.addEventListener("click", function(e) {
+		var target = e.target;
+		if(target.tagName=="A" && target.href.slice(0,4)=="http" && !e.defaultPrevented) {
+			e.preventDefault();
+			window.open(target.href);
+		}
+	}, false);
 	
 }
