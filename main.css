@@ -147,6 +147,24 @@ min-height: 84px;
 min-height: 210px;
 }
 
+#games > .content[visiblegames]:after,
+#games > .content[visiblegames]:before {
+content: attr(visiblegames) " games shown here, " attr(nonvisiblegames) " other games not visible";
+display: block;
+text-align: center;
+margin: 15px auto;
+}
+
+#games > .content[visiblegames][nonvisiblegames="0"]:after,
+#games > .content[visiblegames][nonvisiblegames="0"]:before {
+content: attr(visiblegames) " total games";
+}
+
+#games > .content[nonvisiblegames][visiblegames="0"]:after,
+#games > .content[nonvisiblegames][visiblegames="0"]:before {
+display: none;
+}
+
 #friends > .content {
 min-height: 263px;
 }

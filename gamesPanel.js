@@ -1,7 +1,6 @@
 
 //todo: allow user to choose not to display games that the entire group can't play
 //todo: instead, allow user to set tolerance for how many people can't play
-//todo: show number of games hidden for above reasons with :before/:after on .content
 //todo: allow user to ignore games forever (like single player games)
 //todo: select random game
 
@@ -22,6 +21,8 @@ function gamesPanel() {
 }
 
 gamesPanel.prototype = {
+
+	maxVisibleGames: -1,
 
 	/*
 	Compare by how many selected users own this game.
@@ -47,6 +48,39 @@ gamesPanel.prototype = {
 		return this.compareName(view1, view2);
 	},
 
+	_visibleGames: 0,
+	_nonVisibleGames: 0,
+	
+	get visibleGames() {
+		return this._visibleGames;
+	},
+	
+	set visibleGames(n) {
+		this.content.setAttribute("visibleGames", this._visibleGames = n);
+	},
+	
+	get nonVisibleGames() {
+		return this._nonVisibleGames;
+	},
+	
+	set nonVisibleGames(n) {
+		this.content.setAttribute("nonVisibleGames", this._nonVisibleGames = n);
+	},
+	
+	//Override
+	/*
+	Commits all children up to this.maxVisibleGames.
+	*/
+	commit: function(){
+		var employees = this.children.employees;
+		var considerMaxVisibleGames = this.maxVisibleGames > 0;
+		for(var i=0, len=employees.length; i<len && (!considerMaxVisibleGames || i<this.maxVisibleGames); i++) {
+			employees[i].commit();
+		}
+		this.visibleGames = i;
+		this.nonVisibleGames = len - i;
+	},
+	
 	//todo: let user choose how to sort
 	/*
 	Sort the gamePanel's children using this.defaultCompare.
