@@ -51,7 +51,7 @@ function selectedPanel() {
 	this.content.addEventListener("click", function(e) {
 		var target = e.target;
 		if(target) {
-			if(target.tagName=="DIV" || target.tagName=="IMG" && (target = target.parentNode)) {
+			if(target.tagName=="INPUT" && (target = target.parentNode)) {
 				var view = that.findChildByRef(target);
 				if(view) {
 					e.preventDefault();

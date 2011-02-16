@@ -191,7 +191,7 @@ border-color: #aa5000;
 border-color: #111;
 }
 
-.user[fetchinguser="true"] > img {
+.user[fetchinguser="true"] > input {
 border-style: dashed;
 }
 
@@ -199,20 +199,16 @@ border-style: dashed;
 border-style: dotted;
 }
 
-.user[fetchinggames="true"] > img {
+.user[fetchinggames="true"] > input {
 border-style: dotted;
 }
 
-.user[onlinestate="in-game"] > img {
+.user[onlinestate="in-game"] > input {
 border-color: #b1fb50;
 }
 
-.user[onlinestate="online"] > img {
+.user[onlinestate="online"] > input {
 border-color: #6fbdff;
-}
-
-.user {
-cursor: pointer;
 }
 
 .user:hover {
@@ -244,22 +240,27 @@ background-color: #323215;
 background-color: #322215;
 }
 
-.user > img, .user > div,
+.user > input, .user > div,
 .game > img, .game > div  {
 float: left;
 }
 
-.user > img, .game > img {
+.user > input, .game > img {
 margin: 3px;
 border: 4px solid #676767;
 border-radius: 4px;
 background-color: #454545;
 }
 
-.user > img {
+.user > input {
 height: 48px;
 width: 48px;
 cursor: pointer;
+color: #aeaeae;
+}
+
+.user > input:hover, .user > input:focus {
+border-color: white;
 }
 
 .game > img {

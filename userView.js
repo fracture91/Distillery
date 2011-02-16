@@ -1,6 +1,4 @@
 
-//todo: wrap profile images with links for keyboard accessibility so you can
-//		tab over to an image and press enter to (de)select it
 //todo: button to show this user's owned games
 //todo: refresh button
 
@@ -72,7 +70,9 @@ userView.prototype = {
 	
 	render: function() {
 		if(!this.ref) {
-			this.icon = document.createElement("img");
+			this.icon = document.createElement("input");
+			this.icon.type = "image";
+			this.icon.value = this.icon.title = "Select User";
 			this.id = document.createElement("h4");
 			this.customURL = document.createElement("h6");
 			this.id64 = document.createElement("h6");
