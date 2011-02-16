@@ -28,13 +28,18 @@ function selectedPanel() {
 		var model = userModel.prototype.modelFromString(val);
 		if(model) {
 			that.model.add(userModelManager.add(model));
+			that.selectUserInput.value = "";
 		}
-		that.selectUserInput.value = model ? "" : that.invalidStr;
+		else {
+			that.error = that.invalidStr;
+		}
 	}, false);
 	
-	this.selectUserInput.addEventListener("focus", friendsPanel.clearInputHandler, false);
-	this.selectUserInput.addEventListener("click", friendsPanel.clearInputHandler, false);
-	this.selectUserInput.addEventListener("keydown", friendsPanel.clearInputHandler, false);
+	this.clearInputHandler = friendsPanel.clearInputHandler;
+	
+	this.selectUserInput.addEventListener("focus", function(e){ that.clearInputHandler.call(that, e) }, false);
+	this.selectUserInput.addEventListener("click", function(e){ that.clearInputHandler.call(that, e) }, false);
+	this.selectUserInput.addEventListener("keydown", function(e){ that.clearInputHandler.call(that, e) }, false);
 	
 	this.clearButton.addEventListener("click", function(e) {
 		/*
@@ -125,6 +130,11 @@ selectedPanel.prototype = {
 		view.uncommit();
 		view.model.change({selected: false});
 	},
+	
+	//Override
+	errorHandler: function(str) {
+		this.selectUserInput.value = str;
+	}
 
 }
 

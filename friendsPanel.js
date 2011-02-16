@@ -28,13 +28,13 @@ function friendsPanel() {
 	}, false);
 	
 	this.clearInputHandler = function(e) {
-		if(e.target.value==that.invalidStr || e.target.value==Net.profileNotFoundDisplay)
+		if(e.target.value==this.error)
 			e.target.value = "";
 	}
 	
-	this.getFriendsInput.addEventListener("focus", this.clearInputHandler, false);
-	this.getFriendsInput.addEventListener("click", this.clearInputHandler, false);
-	this.getFriendsInput.addEventListener("keydown", this.clearInputHandler, false);
+	this.getFriendsInput.addEventListener("focus", function(e){ that.clearInputHandler.call(that, e) }, false);
+	this.getFriendsInput.addEventListener("click", function(e){ that.clearInputHandler.call(that, e) }, false);
+	this.getFriendsInput.addEventListener("keydown", function(e){ that.clearInputHandler.call(that, e) }, false);
 	
 	//add user to selectedUsers when clicked on
 	this.content.addEventListener("click", function(e) {
@@ -62,7 +62,7 @@ friendsPanel.prototype = {
 		var that = this;
 		Net.getUserFriends(userModel, this.model, function(xhr, error) {
 			if(error){
-				that.getFriendsInput.value = error == Net.profileNotFoundError ? Net.profileNotFoundDisplay : error;
+				that.error = error;
 			}
 		});
 	},
@@ -74,7 +74,7 @@ friendsPanel.prototype = {
 			this.getFriends(userModelManager.add(model));
 		}
 		else {
-			this.getFriendsInput.value = this.invalidStr;
+			this.error = this.invalidStr;
 		}
 	},
 
@@ -88,6 +88,11 @@ friendsPanel.prototype = {
 	onModelRemove: function(source, model) {
 		var view = this.children.remove(userViewManager.remove(this.findChildByModel(model)));
 		view.uncommit();
+	},
+	
+	//Override
+	errorHandler: function(str) {
+		this.getFriendsInput.value = str;
 	}
 
 }

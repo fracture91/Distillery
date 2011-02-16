@@ -1,4 +1,7 @@
 
+//todo: "splash" screen that will ask for your id so distillery
+//		can start with your friends list open and you selected
+
 window.onload = function() {
 
 	friendsPanel = new friendsPanel();

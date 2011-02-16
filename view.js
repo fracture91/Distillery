@@ -90,6 +90,27 @@ view.prototype = {
 		this.render();
 	},
 	
+	get error() {
+		return this._errorStr;
+	},
+	
+	/*
+	Set this to indicate an error has occurred.
+	*/
+	set error(str) {
+		str = str==Net.profileNotFoundError ? Net.profileNotFoundDisplay : str;
+		this._errorStr = str;
+		this.errorHandler(str)
+	},
+	
+	/*
+	Called by the error setter and passed the error message.
+	Should be overridden.
+	*/
+	errorHandler: function(str) {
+		//do nothing
+	},
+	
 	//Override
 	equals: function(other, ignoreRef) {
 		if(employee.prototype.equals.call(this, other)) {
