@@ -40,7 +40,22 @@ right: 0;
 
 header {
 margin: 5px;
-min-height: 127px;
+min-height: 143px;
+}
+
+header > h1 {
+float: left;
+margin: 0.67em 0.6em;
+}
+
+header > img {
+float: left;
+height: 80px;
+width: 80px;
+}
+
+header > aside {
+float: left;
 }
 
 section {
@@ -116,7 +131,7 @@ text-align: center;
 }
 
 .help strong {
-/*text-decoration: underline;*/
+text-decoration: underline;
 font-size: larger;
 }
 
