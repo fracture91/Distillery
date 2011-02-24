@@ -1,0 +1,39 @@
+Don't know what game to play with your friends on Steam tonight?  Distillery allows you to select a number of Steam users and show which games those users have in common.  If someone in your group doesn't own a certain game, Distillery can list the users who do and do not own the game.  To make selecting users easier, you can display your friends list within the app, or display other people's friends lists.  You can even message users and launch games from within Distillery.
+
+This app is free, but please consider donating if you like it.  You can donate via paypal here:
+https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ZX3A6K7JUQAQE&lc=US&item_name=Distillery&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
+
+The app's github repository can be found here:  https://github.com/fracture91/distillery
+
+This application is not endorsed by Steam or Valve in any way.
+
+The Steam desktop application is required to chat with users and launch games.  You can only chat with people on your friends list and you can only launch games that you own.
+
+If a user's profile is private, you cannot see their friends list or list of owned games.  You can log in to the Steam Community website in a different tab if you want to see a friend's information whose privacy is set to Friends Only.
+
+To select a user or see someone's friend list, you will need to input their 64-bit Steam ID number or their custom URL.  This information can be found in the user's Steam Community profile page URL.  For example:
+http://steamcommunity.com/id/coolCustomURLThatDoesntExist
+http://steamcommunity.com/profiles/98765432109876543
+Typing in just a nickname will not work, since nicknames are neither unique nor constant.
+
+This application depends on information provided by Steam.  If these network resources are not available to you (for example, Steam's site is down), the app will not work.  I do not hold any responsibility for Steam's uptime or future existence.
+
+The application neither sees nor requires your Steam account credentials.  A Steam account is not necessary to use Distillery.
+
+The app's Chrome Web Store page can be found here:  https://chrome.google.com/webstore/detail/gpaclkncjapjdefmjpkaclfeemmpojog
+
+Copyright 2011 Andrew Hurle
+License information can be found in license.txt
+
+Distillery is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Distillery is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Distillery.  If not, see <http://www.gnu.org/licenses/>.
